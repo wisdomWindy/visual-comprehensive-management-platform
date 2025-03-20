@@ -37,6 +37,16 @@ const data = [{
     name:'B2',
     value:30
   }]
+},{
+  name:'C',
+  value:'40',
+  children:[{
+    name:'C1',
+    value:30
+  },{
+    name:'C2',
+    value:10
+  }]
 }];
 const levels = [{
   itemStyle: {
