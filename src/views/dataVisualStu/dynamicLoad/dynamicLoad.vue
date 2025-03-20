@@ -1,7 +1,7 @@
 <template>
  <div class="container">
-  <BaseDynamicLoad />
-  <DynamicAppend />
+  <BaseDynamicLoad></BaseDynamicLoad>
+  <DynamicAppend></DynamicAppend>
  </div>
 </template>
 
