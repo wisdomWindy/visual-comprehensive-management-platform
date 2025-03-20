@@ -30,7 +30,7 @@ function createOption() {
   const initOption = {
     title: [
       {
-        text: '泰兴位置总览',
+        text: 'xx位置总览',
         textStyle: {
           color: '#fff',
           fontSize: 20,
@@ -64,8 +64,8 @@ function createOption() {
           fontSize: 18,
           fontWeight: 200,
         },
-        left: 103,
-        top: 220,
+        left: '12%',
+        top: '40%',
       },
       {
         text: `{a|今日进出园区车辆}\n {a|${1}}{a|2}{a|${3}}{a|${1}}`,
@@ -181,7 +181,7 @@ function createOption() {
         color: '#fff',
       },
       left:'10%',
-      top:'10%'
+      top:'12%'
     },
     grid: {
       top: '80%',
@@ -192,7 +192,7 @@ function createOption() {
     },
     radar: {
       radius: 103,
-      center: ['18%', '80%'],
+      center: ['18%', '77%'],
       splitArea: {
         areaStyle: {
           color: ['#0d78e0', '#11185f'],

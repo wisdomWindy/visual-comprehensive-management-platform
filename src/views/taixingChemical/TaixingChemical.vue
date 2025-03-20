@@ -6,18 +6,19 @@
         <span>星期三</span>
       </div>
       <div class="header-center">
-        <span>泰兴化工管理后台</span>
+        <span>xxxx管理后台</span>
       </div>
       <div class="header-right flex">
         <span>23℃</span>
         <span>东风</span>
         <span>空气佳</span>
-        <span>泰兴</span>
+        <span>xx</span>
       </div>
     </div>
     <div class="main">
       <div class="left">
         <dv-border-box-7 class="mainChart">
+          <!-- 地图图表 -->
           <MainChart></MainChart>
         </dv-border-box-7>
         <div class="left-bottom">
@@ -52,13 +53,18 @@ import StructuralAnalysis from './components/StructuralAnalysis.vue'
 }
 .header {
   color: #fff;
-  height: 30px;
+  height: 79px;
+  padding:0 10px 15px;
   align-items: center;
   justify-content: space-between;
-  background-image: url('@/assets/img/header-bg.png');
+  background: url('/imgs/header-bg.png') no-repeat 0% 0%/100% 100%;
 }
 .header-right {
   justify-content: flex-end;
+}
+.header-center{
+  font-size:30px;
+  font-weight:bold;
 }
 .main {
   width: 100%;
