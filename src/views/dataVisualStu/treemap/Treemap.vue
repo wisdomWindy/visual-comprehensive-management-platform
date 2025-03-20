@@ -72,7 +72,9 @@ const {container:treemap} = useEcharts({
         show:true
       },
       visibleMin:0,
+      //  配置层级样式
       levels,
+      // treemap数据
       data
     }]
   });
