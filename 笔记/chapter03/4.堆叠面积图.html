@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/echarts.min.js"></script>
+</head>
+<body>
+    <div id="ec" style="width:600px;height:400px"></div>
+</body>
+<script>
+    var ech = document.getElementById("ec")
+    var mychart = echarts.init(ech)
+    var options = {
+        xAxis:{
+            type:'category',
+            data:['周一','周二','周三','周四','周五','周六','周末']
+        },
+        yAxis:{
+            type:'value'
+        },
+        series:[{
+            type:'line',
+            smooth:true, // 平滑 反之则不平滑
+            areaStyle:{},
+            stack:'a',
+            data:[50,80,90,23,67,50,32]
+        },{
+            type:'line',
+            smooth:true, // 平滑 反之则不平滑
+            areaStyle:{},
+            stack:'a',
+            data:[40,30,10,53,87,10,62]
+        },{
+            type:'line',
+            smooth:true, // 平滑 反之则不平滑
+            areaStyle:{},
+            stack:'a',
+            data:[40,20,96,13,37,40,30]
+        },{
+            type:'line',
+            smooth:true, // 平滑 反之则不平滑
+            areaStyle:{},
+            stack:'a',
+            data:[52,10,40,23,64,10,32]
+        }]
+    }
+    mychart.setOption(options)
+</script>
+</html>

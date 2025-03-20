@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/echarts.min.js"></script>
+</head>
+<body>
+    <div id="ec" style="width:600px;height:400px"></div>
+</body>
+<script>
+    var ech = document.getElementById("ec")
+    var mychart = echarts.init(ech)
+    var options = {
+        backgroundColor:"#0f1536",
+        // tooltip:{},
+        legend:{
+            align:'left',
+            orient:'vertical',
+            right: "2%",
+            top:'center',
+            textStyle:{
+                color:'#a3e1f3'
+            }
+        },
+        polar:{},
+        angleAxis:{
+            type:'category'
+        },
+        radiusAxis:{
+            min:0,
+            max:40,
+            axisLine:{
+                show:false
+            },
+            axisLabel:{
+                show:false
+            },
+            axisTick:{
+                show:false
+            },
+            splitLine:{
+                lineStyle:{
+                    color:'#114869',
+                    width:2
+                }
+            }
+        },
+        series:[
+            {
+                type:'pie',
+                radius:["5%","10%"],
+                data:[0],
+                labelLine:{
+                    show:false
+                },
+                silent:true,
+                itemStyle:{
+                    color:'#114869'
+                }
+            },
+            {
+                type:'pie',
+                radius:["90%","95%"],
+                data:[0],
+                labelLine:{
+                    show:false
+                },
+                silent:true,
+                itemStyle:{
+                    color:'#114869'
+                }
+            },
+            {
+                type:'pie',
+                radius:["20%","80%"],
+                roseType:'area',
+                label:{
+                    formatter:function(r){
+                        return r.value
+                    }
+                },
+                labelLine:{
+                    length:20,
+                    length2:50
+                },
+                z:10,
+                data:[{value:10,name:'安踏'},
+                {value:20,name:'七匹狼'},
+                {value:15,name:'波司登'},
+                {value:5,name:'浪莎'},
+                {value:50,name:'红豆'},
+                ]
+            }
+    ]
+    }
+    mychart.setOption(options)
+</script>
+</html>

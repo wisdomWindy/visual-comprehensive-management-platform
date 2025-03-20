@@ -1,0 +1,177 @@
+<template>
+ <div class="container">
+  <div class="title">数量</div>
+  <div class="chart-container" ref="chartContainer"></div>
+ </div>
+</template>
+
+<script setup>
+import useEcharts from '@/hooks/useEcharts';
+const xData = ['00:05', '00:10', '00:15', '00:20', '00:25', '00:30']
+const {container:chartContainer} = useEcharts({
+  legend:{
+    show:true,
+    right:'5%',
+    top:'18%',
+    itemWidth:12,
+    itemHeight:12,
+    textStyle:{
+      color:'#fff'
+    },
+    data:[{
+      name:'400',
+      itemStyle:{
+        color:'#0142C3'
+      }
+    },{
+      name:'621',
+      itemStyle:{
+        color:'#E92B97'
+      }
+    },{
+      name:'321',
+      itemStyle:{
+        color:'#028EF7'
+      }
+    }]
+  },
+  grid:{
+    left:'20%',
+    top:'30%',
+    right:'10%',
+    bottom:'10%'
+  },
+  xAxis:{
+    boundaryGap:false,
+    type:'category',
+    data:xData,
+     axisLabel:{
+      color:'rgba(255,255,255,0.65)'
+    },
+
+    axisTick:{
+      alignWidthLabel:true
+    },
+    axisLine:{
+      lineStyle:{
+        color:'rgba(255,255,255,0.1)'
+      }
+    }
+  },
+  yAxis:{
+    type:'value',
+    min:0,
+    max:100,
+    axisLabel:{
+      color:'#fff'
+    },
+    splitLine:{
+      lineStyle:{
+        color:'rgba(255,255,255,0.1)'
+      }
+    },
+    axisTick:{
+      show:false
+    }
+  },
+  series:[{
+    type:'line',
+    name:'400',
+    data:[4,45,10,30,18,58,2,43,18,83,43,59,35,43],
+    smooth:true,
+    itemStyle:{
+      color:'transparent',
+      opacity:0,
+      borderWidth:0
+    },
+    lineStyle:{
+      color:{
+        type:'linear',
+        x:0,
+        y:0,
+        x2:1,
+        y2:0,
+        colorStops:[{
+          offset:0,
+          color:'rgb(61,221,255)'
+        },{
+          offset:1,
+          color:'rgb(98,251,255)'
+        }],
+      }
+    }
+  },{
+    type:'line',
+    name:'621',
+    data:[10,20,10,21,10,24,2,23,10,9,1,15,1,6,1],
+    smooth:true,
+     itemStyle:{
+      color:'transparent',
+      opacity:0,
+      borderWidth:0
+    },
+    lineStyle:{
+      color:{
+        type:'linear',
+        x:0,
+        y:0,
+        x2:1,
+        y2:0,
+        colorStops:[{
+          offset:0,
+          color:'rgb(25,104,255)'
+        },{
+          offset:1,
+          color:'rgb(54,161,255)'
+        }],
+      }
+    }
+  },{
+    type:'line',
+    name:'321',
+    data:[0,30,17,30,1,20,18,30,22,5,10,11,35,1,38],
+    smooth:true,
+    showSymbol:false,
+    itemStyle:{
+      color:'transparent',
+      opacity:0,
+    },
+    lineStyle:{
+      color:{
+        type:'linear',
+        x:0,
+        y:0,
+        x2:1,
+        y2:0,
+        colorStops:[{
+          offset:0,
+          color:'rgb(229,32,190)'
+        },{
+          offset:1,
+          color:'rgb(254,33,121)'
+        }],
+      }
+    }
+  }]
+})
+</script>
+
+<style scoped>
+ .container{
+  position: relative;
+ }
+ .title{
+  width:210px;
+  text-indent:40px;
+  font-size: 21px;
+  color:#fff;
+  position: absolute;
+  left:5%;
+  top:5%;
+  background:url('/imgs/title_bg.png') no-repeat;
+ }
+ .chart-container{
+  width:100%;
+  height:100%;
+ }
+</style>

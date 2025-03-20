@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/echarts.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+</head>
+<body>
+    <div id="echs" style="width: 600px;height: 400px;"></div>
+    <script>
+        var idEchs = document.getElementById("echs")
+        var ehc = echarts.init(idEchs)
+        var options = {
+            xAxis:{
+                type:'category',
+                data:['星期一','星期二','星期三'],
+                name:'x轴'
+            },
+            yAxis:{
+                type:'value',
+                name:'y轴'
+            },
+            series:[{
+                name:'2021',
+                type:'bar',
+                // data:[10,14,23]
+            }]
+        }
+        setData (0)
+        var i = 0 
+        setInterval(function() {
+            i++
+            if(i > 3) {
+                clearInterval()
+                return
+            }
+            setData(i) 
+        },1000)
+        function setData(index) {
+            var arr = ["v1.json", "v2.json", "v3.json"]
+            $.getJSON(arr[index],function(r) {
+                console.log(r)
+                options.series[0].data = r['data']
+                ehc.setOption(options)
+            })
+        }
+     </script>
+</body>
+</html>

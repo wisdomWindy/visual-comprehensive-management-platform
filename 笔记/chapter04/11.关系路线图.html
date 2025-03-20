@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/echarts.min.js"></script>
+</head>
+<body>
+    <div id="ec" style="width:600px;height:400px"></div>
+</body>
+<script>
+    var ech = document.getElementById("ec")
+    var mychart = echarts.init(ech)
+    var options = {
+        xAxis:{
+            show:false,
+            type:'value',max:50
+        },
+        yAxis:{
+            type:"value",
+            show:false
+        },
+        series:[{
+            type:'graph',
+            symbol:'circle',
+            coordinateSystem:'cartesian2d',
+            symbolSize:50,
+            data:[
+                {name:'(1)',value:[20,200]},
+                {name:'(2)',value:[20,100]},
+                {name:'(3)',value:[20,0]}
+            ],
+            label:{
+                show:true
+            },
+            edgeSymbol: ['none', 'arrow'],
+            links:[
+                {source:"(1)",target:"(2)"},
+                {source:"(2)",target:"(3)"}
+            ],
+            z:100,
+            lineStyle:{
+                color:'black'
+            }
+        },{
+            type:'lines',
+            coordinateSystem:'cartesian2d',
+            effect:{
+                show:true,
+                symbolSize:10,
+                color:'black',
+                period:2,
+                trailLength:0
+            },
+            data:[{
+                coords:[
+                    [20,200], // 小点起始位置
+                    [20,100]  // 小点终点位置
+                ]
+            },{
+                coords:[
+                    [20,100], // 小点起始位置
+                    [20,0]  // 小点终点位置
+                ]
+            },{
+                coords:[
+                    [20,200], // 小点起始位置
+                    [20,0]  // 小点终点位置
+                ]
+            }]
+        }]
+    }
+    mychart.setOption(options)
+</script>
+</html>

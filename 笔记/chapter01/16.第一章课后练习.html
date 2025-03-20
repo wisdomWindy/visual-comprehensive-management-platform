@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/echarts.min.js"></script>
+</head>
+<body>
+    
+    <div id="echs" style="width: 800px; height:600px"></div>
+    <script>
+        var idEchs = document.getElementById("echs")
+        var ehc = echarts.init(idEchs)
+        var options = {
+            backgroundColor:'#0e205d',
+            title:{
+                text:"办公室杂项",
+                left:'50%',
+                textAlign:'center',
+                textStyle:{
+                    color:'white',
+                }
+            },
+            xAxis:{
+                type:'category',
+                axisLine:{
+                    show:true,
+                    symbol:['none',"arrow"],
+                    symbolOffset:[0,10]
+                },
+                data:["工作票","操作票","抢修","用电调查","设备巡视","现场勘察","到岗到位"],
+                axisLabel:{
+                    color:'white',
+                    margin:10,
+                    fontSize:16
+                },
+            },
+            yAxis:{
+                type:'value',
+                // 坐标设置
+                axisLine:{
+                    show:true,
+                    symbol:['none',"arrow"],
+                    symbolOffset:[0,10]
+                },
+                // 坐标轴标签设置
+                axisLabel:{
+                    color:'white'
+                },
+                splitLine:{
+                    lineStyle:{
+                        color:'#20376d'
+                    }
+                }
+            },
+            color:[{
+            type: 'linear',
+            x: 0,
+            y: 0,
+            x2: 0,
+            y2: 1,
+            colorStops: [{
+                offset: 0, color: '#00f1fd' // 0% 处的颜色
+            }, {
+                offset: 1, color: '#1f45a4' // 100% 处的颜色
+            }],
+            global: false // 缺省为 false
+            }],
+            series:[{
+                type:'bar',
+                data:[300,450,770,203,255,188,156],
+                barWidth:20,
+                itemStyle:{
+                    borderRadius: 20,
+                    shadowColor:'#1f45a4',
+                    shadowBlur:4
+                },
+                label:{
+                    show:true,
+                    position: 'top',
+                    backgroundColor:'#102d6a',
+                    width:30,
+                    height:30,
+                    lineHegiht:30,
+                    align:'center',
+                    verticalAlign:'middle',
+                    borderRadius:30,
+                    distance:20
+                }
+            }]
+        }
+        ehc.setOption(options)
+     </script>
+</body>
+</html>

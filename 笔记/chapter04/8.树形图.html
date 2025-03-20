@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/echarts.min.js"></script>
+</head>
+<body>
+    <div id="ec" style="width:600px;height:400px"></div>
+</body>
+<script>
+    var  data = {
+                name: '根',
+                children: [{
+                    name: '枝叶1',
+                    children: [{
+                        name: '枝叶1-1',
+                        children: [{ 
+                            name: '枝叶1-1-1', 
+                            value: 721 
+                        },{ 
+                            name: '枝叶1-1-2', 
+                            value: 4294 
+                        }]
+                    },{
+                        name: '枝叶1-2',
+                        value: 3322
+                    }]
+                },{
+                    name: '枝叶二',
+                    children: [{ 
+                        name: '枝叶2-1', 
+                        value: 8833 
+                    },{ 
+                        name: '枝叶2-2', 
+                        value: 1732 
+                    },{ 
+                        name: '枝叶2-3', 
+                        value: 3623 
+                    }]
+                },{
+                    name: '枝叶三',
+                    children: [{ 
+                        name: '枝叶3-1', 
+                        value: 1616 
+                    },{ 
+                        name: '枝叶3-2', 
+                        value: 1027 
+                    },{
+                        name: '枝叶3-3',
+                        children: [{ 
+                            name: '枝叶3-3-1', 
+                            value: 593 
+                        },{ 
+                            name: '枝叶3-3-2', 
+                            value: 330 
+                        },{ 
+                            name: '枝叶3-3-3', 
+                            value: 287 
+                        },{ 
+                            name: '枝叶3-3-4', 
+                            value: 277 
+                        }]
+                    }]
+                }]
+            }
+
+    var ech = document.getElementById("ec")
+    var mychart = echarts.init(ech)
+    var options = {
+       series:[{
+        type:'tree',
+        edgeShape:'polyline',
+        label:{
+            position:'left',
+            backgroundColor:'#fff'
+        },
+        leaves:{
+            label:{
+                position:'right'
+            }
+        },
+        data:[data]
+       }]
+    }
+    mychart.setOption(options)
+</script>
+</html>

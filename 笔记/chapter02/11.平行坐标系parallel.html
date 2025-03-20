@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/echarts.min.js"></script>
+</head>
+<body>
+    <div id="ec" style="width:600px;height:400px"></div>
+</body>
+<script>
+    var ech = document.getElementById("ec")
+    var myCh = echarts.init(ech)
+    var options = {
+        parallel:{
+            left:'30%',
+            layout:'vertical'
+        },
+        parallelAxis:[
+            {dim:0,name:'价格'},
+            {dim:1,name:'重量'},
+            {dim:2,name:'总计'},
+            {dim:3,name:'得分',type:'category',data:['优秀','良好','中等','下']},
+        ],
+        series:[{
+            type:'parallel',
+            lineStyle:{
+                width:4
+            },
+            data:[
+                [12,99,100,'优秀'],
+                [12,80,60,'下'],
+                [50,40,100,'中等'],
+                [22,50,20,'良好'],
+            ]
+        }]
+    }
+    myCh.setOption(options)
+</script>
+</html>

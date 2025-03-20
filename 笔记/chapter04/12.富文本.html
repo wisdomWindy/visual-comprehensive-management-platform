@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/echarts.min.js"></script>
+</head>
+<body>
+    <div id="ec" style="width:600px;height:400px"></div>
+</body>
+<script>
+    var ech = document.getElementById("ec")
+    var mychart = echarts.init(ech)
+    var options = {
+        title:{
+            text:"水果超市{a|香蕉和苹果}，在\n水果便宜卖了.\n{b|一个苹果} {c|两个香蕉}\n多吃水果，多喝热水",
+            backgroundColor:'#dedede',
+            borderColor:'#d07674',
+            borderWidth:2,
+            borderRadius:5,
+            shadowColor: '#a09e9e',
+            shadowBlur: 10,
+            shadowOffsetX:2,
+            shadowOffsetY:2,
+            padding:20,
+            textStyle:{
+                lineHeight: 30,
+                fontSize:16,
+                fontWeight:500,
+                rich:{
+                    a:{
+                        fontSize:22,
+                        color:'#d07674'
+                    },
+                    b:{
+                        backgroundColor:'#2c2c2c',
+                        color:'#b0b836',
+                        padding:5
+                    },
+                    c:{
+                        backgroundColor:'#49a946',
+                        color:'#fff',
+                        padding:5,
+                        borderRadius:20
+                    }
+                }
+                // color:'orange',
+                // fontSize:50,
+                // rich:{
+                //     a:{
+                //         color:'red',
+                //         fontSize:20
+                //     },
+                //     b:{
+                //         backgroundColor:{
+                //             image:'https://echarts.apache.org/zh/images/favicon.png?_v_=20200710_1'
+                //         }
+                //     }
+                // }
+            }
+        },
+        
+    }
+    mychart.setOption(options)
+</script>
+</html>

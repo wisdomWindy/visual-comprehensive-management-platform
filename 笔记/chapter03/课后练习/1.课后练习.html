@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/echarts.min.js"></script>
+</head>
+<body>
+    <div id="ec" style="width:600px;height:400px"></div>
+</body>
+<script>
+    var ech = document.getElementById("ec")
+    var mychart = echarts.init(ech)
+    var options = {
+        xAxis:{
+            type:'category',
+            // boundaryGap:false,
+            axisTick:{
+                alignWithLabel:true
+            },
+            data:['周一','周二','周三','周四','周五','周六','周末']
+        },
+        yAxis:{
+            type:'value'
+        },
+        tooltip:{
+            trigger:'axis',
+            axisPointer:{
+                type:'none'
+            }
+        },
+        toolbox:{
+            feature:{
+                saveAsImage:{},
+                dataView:{},
+                restore:{},
+                dataZoom:{},
+                magicType: {
+                type: ['line', 'bar']
+            }
+            }
+        },
+        legend:{},
+        series:[{
+            name:'大型车',
+            type:'line',
+            smooth:true,
+            lineStyle:{
+                color:"black"
+            },
+            itemStyle:{
+                color:"orange"
+            },
+            areaStyle:{
+                color:{
+                    type: 'linear',
+                    x: 0,
+                    y: 0,
+                    x2: 0,
+                    y2: 1,
+                    colorStops: [{
+                        offset: 0, color: '#c6c6ff' // 0% 处的颜色
+                    }, {
+                        offset: 1, color: '#fdfdff' // 100% 处的颜色
+                    }],
+                    global: false // 缺省为 false
+                }
+            },
+            data:[98,100,100,90,67,50,32]
+        },
+        {
+            name:'中型车',
+            type:'line',
+            smooth:true,
+            data:[80,75,60,50,60,50,0]
+        },
+        {
+            name:'小型车',
+            type:'line',
+            smooth:true,
+            data:[20,50,50,23,17,30,32]
+        }]
+    }
+    mychart.setOption(options)
+</script>
+</html>

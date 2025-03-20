@@ -1,0 +1,91 @@
+<template>
+ <div class="chart-box" ref="chartBox">
+
+ </div>
+</template>
+
+<script setup>
+import useEcharts from '@/hooks/useEcharts';
+const {container:chartBox} = useEcharts({
+  grid:{
+    left:'10%',
+    top:'10%',
+    bottom:'10%',
+    right:'10%'
+  },
+  legend:{
+    itemWidth:11,
+    itemHeight:11,
+    orient:'vertical',
+    icon:'circle',
+    top:'10%',
+    right:'10%',
+    textStyle:{
+      color:'#fff'
+    },
+    data:[{
+      name:'甲设备',
+      itemStyle:{
+        color:'#85FFFF'
+      }
+    },{
+      name:'乙设备',
+      itemStyle:{
+        color:'#13E2BA'
+      }
+    },{
+      name:'丙设备',
+      itemStyle:{
+        color:'#118FED'
+      }
+    },{
+      name:'丁设备',
+      itemStyle:{
+        color:'#99FF40'
+      }
+    },{
+      name:'戊设备',
+      itemStyle:{
+        color:'#FFDE55'
+      }
+    }]
+  },
+  series:[{
+    type:'pie',
+    center:['50%','50%'],
+    radius:'80%',
+    axisLabel:{
+      show:false,
+    },
+    labelLine:{
+      show:false
+    },
+    label:{
+      show:false
+    },
+    data:[{
+      name:'甲设备',
+      value:12
+    },{
+      name:'乙设备',
+      value:12
+    },{
+      name:'丙设备',
+      value:12
+    },{
+      name:'丁设备',
+      value:12
+    },{
+      name:'戊设备',
+      value:12
+    }]
+  }]
+});
+</script>
+
+<style scoped>
+.chart-box{
+  width:100%;
+height:100%;
+}
+</style>

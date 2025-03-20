@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/echarts.min.js"></script>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+    <div id="ec" style="width:600px;height:400px"></div>
+</body>
+<script>
+    var ech = document.getElementById("ec")
+    var myCh = echarts.init(ech)
+    // https://geo.datav.aliyun.com/areas_v3/bound/320100_full.json
+    $.getJSON("https://geo.datav.aliyun.com/areas_v3/bound/320100_full.json",function(r){
+        // 注册地图组件
+        echarts.registerMap("南京",r)
+        var options = {
+            geo:{
+                map:"南京",
+                label:{
+                    show:true
+                },
+                itemStyle:{
+                    areaColor:'#3a90fa'
+                },
+                regions: [{
+                    name: '江宁区',
+                    itemStyle: {
+                        areaColor: 'red',
+                        color: 'red'
+                    }
+                }]
+            }
+        }
+        myCh.setOption(options)
+    })
+    
+</script>
+</html>

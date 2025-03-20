@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/echarts.min.js"></script>
+</head>
+<body>
+    <div id="ec" style="width:1200px;height:800px"></div>
+</body>
+<script>
+    var ech = document.getElementById("ec")
+    var mychart = echarts.init(ech)
+    var hours = [
+        '12a', '1a', '2a', '3a', '4a', '5a', '6a',
+        '7a', '8a', '9a', '10a', '11a',
+        '12p', '1p', '2p', '3p', '4p', '5p',
+        '6p', '7p', '8p', '9p', '10p', '11p'
+    ];
+    // prettier-ignore
+    var days = [
+        '周六', '周五', '周四',
+        '周三', '周二', '周一', '周日'
+    ];
+    // 径向轴 角度轴
+    var data = [[0,0,5],[0,1,10],[1,1,10],[6,2,40],[5,2,80],[4,3,80]]
+    var options = {
+        polar:{},
+        angleAxis:{
+            type:'category',
+            data:hours,
+            axisLine:{
+                show:false
+            },
+            splitLine:{
+                show:true
+            },
+            boundaryGap:false,
+        //     axisTick:{
+        //         show:false
+        //     }
+        },
+        radiusAxis:{
+            type:'category',
+            axisLine:{
+                show:false
+            },
+            data:days
+        },
+        // xAxis:{
+        //     type:'category',
+        //     data:hours,
+        //     boundaryGap:false,
+        //     axisLine:{
+        //         show:false
+        //     },
+        //     splitLine:{
+        //         show:true
+        //     },
+        //     axisTick:{
+        //         show:false
+        //     }
+        // },
+        // yAxis:{
+        //     type:'category',
+        //     axisLine:{
+        //         show:false
+        //     },
+        //     data:days
+        // },
+        series:[{
+            type:'scatter',
+            coordinateSystem:'polar',
+            symbolSize:function(r){
+                return r[2]
+            },
+            data:data
+        }]
+    }
+    mychart.setOption(options)
+</script>
+</html>

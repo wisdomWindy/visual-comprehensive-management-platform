@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/echarts.min.js"></script>
+</head>
+<body>
+    <div id="ec" style="width:1200px;height:800px"></div>
+</body>
+<script>
+    var ech = document.getElementById("ec")
+    var mychart = echarts.init(ech)
+    /*
+        {name: "N[0]",max: 180},
+        {name: "",max: 180,},
+        {name: "W[270]",max: 180,},
+        {name: "",max: 180,},
+        {name: "S[180]",max: 180,},
+        {name: "",max: 180,},
+        {name: "E[90]",max: 180,},
+        {name: "",max: 180,}
+        sdata =
+        [
+                {
+                    value : [60, 10, 20, 50, 60, 90, 60, 60],
+                    name : 'GPS',
+                    itemStyle:{
+                        color:"rgba(255, 0, 0, 0.4)"
+                    }
+                },{
+                    value : [70, 30, 50, 80, 90, 40, 88],
+                    name : 'BDS',
+                    itemStyle:{
+                        color:"rgb(0,64,255,0.4)"
+                    }
+                },{
+                    value : [80, 20, 40, 60, 80, 20, 44],
+                    name : 'GLONASS',
+                    itemStyle:{
+                        color:"rgb(0,247,255,0.4)"
+                    }
+                },{
+                    value : [60, 15, 25, 35, 45, 20, 44],
+                    name : 'Galileo',
+                    itemStyle:{
+                        color:"rgb(0,255,234,0.4)"
+                    }
+                }
+            ]
+    */
+    var options = {
+        backgroundColor:"#000",
+        radar:{
+            shape:'circle',
+            indicator:[
+                {name: "N[0]",max: 180},
+                {name: "",max: 180,},
+                {name: "W[270]",max: 180,},
+                {name: "",max: 180,},
+                {name: "S[180]",max: 180,},
+                {name: "",max: 180,},
+                {name: "E[90]",max: 180,},
+                {name: "",max: 180,}
+            ],
+            splitArea:{
+                areaStyle:{
+                    color:"none"
+                }
+            },
+            splitNumber:4,
+            axisLine:{
+                lineStyle:{
+                    width:2,
+                    type:'dashed',
+                    color:'#09a2d9'
+                }
+            },
+            splitLine:{
+                lineStyle:{
+                    width:2,
+                    color:'#09a2d9'
+                }
+            },
+            axisLabel:{
+                show:true,
+                color:'#09a2d9'
+            }
+        },
+        legend:{
+            textStyle:{
+                color:'#eee'
+            },
+            data:[
+                    {name:'GPS',icon:'circle'},
+                    {name:'BDS',icon:'circle'},
+                    {name:'GLONASS',icon:'circle'},
+                    {name:'Galileo',icon:'circle'}
+                ],
+            bottom:10
+        },
+        series:[{
+            type:'radar',
+            symbolSize:20,
+            lineStyle:{
+                color:'none'
+            },
+            data:[
+                {
+                    value : [60, 10, 20, 50, 60, 90, 60, 60],
+                    name : 'GPS',
+                    itemStyle:{
+                        color:"rgba(255, 0, 0, 0.4)"
+                    }
+                },{
+                    value : [70, 30, 50, 80, 90, 40, 88],
+                    name : 'BDS',
+                    itemStyle:{
+                        color:"rgb(0,64,255,0.4)"
+                    }
+                },{
+                    value : [80, 20, 40, 60, 80, 20, 44],
+                    name : 'GLONASS',
+                    itemStyle:{
+                        color:"rgb(0,247,255,0.4)"
+                    }
+                },{
+                    value : [60, 15, 25, 35, 45, 20, 44],
+                    name : 'Galileo',
+                    itemStyle:{
+                        color:"rgb(0,255,234,0.4)"
+                    }
+                }
+            ]
+        }]
+    };
+    mychart.setOption(options)
+</script>
+</html>

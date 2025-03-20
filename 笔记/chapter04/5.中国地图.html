@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/echarts.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+</head>
+<body>
+    <div id="ec" style="width:1200px;height:800px"></div>
+</body>
+<script>
+    var ech = document.getElementById("ec")
+    var mychart = echarts.init(ech)
+    var url = 'https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json'
+    $.getJSON(url,function(r) {
+        echarts.registerMap("中国",r)
+
+        var options = {
+            geo:{
+                map:"中国",
+                show:true,
+                // label:{
+                //     show:true,
+                //     fontWeight:600,
+                //     formatter:function(r) {
+                //         console.log(r.name)
+                //         if(r.name === '内蒙古自治区') {
+                //             return r.name.substr(0,3)
+                //         }
+                //         return r.name.substr(0,2)
+                //     }
+                // },
+                // regions:[{
+                //     name: '广东省',
+                //     selected:true
+                //     // itemStyle: {
+                //     //     areaColor: 'red',
+                //     //     color: 'red'
+                //     // }
+                // },{
+                //     name: '香港特别行政区',
+                //     label:{
+                //         offset:[2,12]
+                //     }
+                // },{
+                //     name: '澳门特别行政区',
+                //     label:{
+                //         offset:[-15,15]
+                //     }
+                // }]
+            },series:[{
+                type:'map',
+                map:"中国",
+                label:{
+                    show:true,
+                    fontWeight:600,
+                    formatter:function(r) {
+                        if(r.name === '内蒙古自治区') {
+                            return r.name.substr(0,3)
+                        }
+                        return r.name.substr(0,2)
+                    }
+                },
+                data:[{
+                    name:'广东省',
+                    selected:true
+                }]
+            }]
+        }
+        mychart.setOption(options)
+    })
+    
+    
+</script>
+</html>

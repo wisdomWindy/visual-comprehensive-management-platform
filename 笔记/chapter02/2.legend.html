@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/echarts.min.js"></script>
+</head>
+<body>
+    <div id="ec" style="width:600px;height:400px"></div>
+</body>
+<script>
+    var ech = document.getElementById("ec")
+    var myCh = echarts.init(ech)
+    var options = {
+        legend:{
+            data:["裤子",{name:"衬衫",icon:'circle',textStyle:{color:'red'}},'毛衣','t-shit'],
+            // 图例相对于文字的左右
+            align:'right',
+            selected:{
+                "裤子":false,
+                "衬衫":false
+            },
+            // selectedMode:false
+            // selectedMode:'multiple'
+            selector:[{type: 'all or inverse', title: '全选'},{type: 'inverse',title: '反选'}]
+
+        },
+        xAxis:{
+            type:'category',
+            data:["第一季度","第二季度","第三季度"]
+        },
+        yAxis:{},
+        series:[{
+            type:'bar',
+            name:'裤子',
+            data:[45,85,95]
+        },{
+            type:'bar',
+            name:'衬衫',
+            data:[82,73,54]
+        },{
+            type:'bar',
+            name:'毛衣',
+            data:[85,66,98]
+        },{
+            type:'bar',
+            name:'t-shit',
+            data:[73,55,25]
+        }]
+    }
+    myCh.setOption(options)
+</script>
+</html>

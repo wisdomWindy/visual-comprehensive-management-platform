@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/echarts.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js">
+    </script>
+</head>
+<body>
+    <div id="echs" style="width: 800px; height: 600px;"></div>
+    <script>
+        var c_data = [
+                {name: "主卧1",value: [116.409, 39.921,1]},
+                {name: "主卧2",value: [116.409, 39.935,1]},
+                {name: "书房",value: [116.432, 39.939,1]},
+                {name: "卫生间",value: [116.4516, 39.939,1]},
+                {name: "客厅1", value: [116.41, 39.9036,1]},
+                {name: "客厅2", value:[116.43, 39.918,1]},
+                {name: "客厅3",value: [116.4516, 39.9306,1]},
+                {name: "次卧",value:  [116.4516, 39.920,1]},
+                {name: "楼梯",value:  [116.447, 39.911,1]},
+                {name: "厨房",value:  [116.4516, 39.905,1]},
+            ]
+        var j_data = [
+            {"name": "基站1","value": [116.415,39.915,0]},
+            {"name": "基站2","value": [116.448,39.935,0]},
+            {"name": "基站3","value": [116.455, 39.915,0]},
+            {"name": "控制中心","value": [116.435,39.925,0]},
+        ]
+        var coor = [
+            [
+                {"coord": [116.41,39.9036],"value": 20},
+                {"coord": [116.415,39.915]}
+            ],
+            [
+                {"coord": [116.43,39.918],"value": 25},
+                {"coord": [116.415,39.915]}
+            ],
+            [
+                {"coord": [116.409,39.921],"value": 17},
+                {"coord": [116.415,39.915]}
+            ],
+            [
+                {"coord": [116.409,39.935],"value": 19},
+                {"coord": [116.415,39.915]}
+            ]
+            ]
+        var idEchs = document.getElementById("echs")
+        var ehc = echarts.init(idEchs)
+        $.getJSON("./js/home.json",function(r) {
+            echarts.registerMap("home",r)
+            var options = {
+                backgroundColor:'#003455',
+                geo:{
+                    map:"home",
+                    zoom:0.8,
+                    show:true,
+                    center: [116.453, 39.920],
+                    itemStyle: {
+                        borderColor: 'rgba(147, 235, 248, 1)',
+                        borderWidth: 1,
+                        areaColor: {
+                            type: 'radial',
+                            x: 0.5,
+                            y: 0.5,
+                            r: 0.8,
+                            colorStops: [{
+                                offset: 0,
+                                color: 'rgba(147, 235, 248, 0)' // 0% 处的颜色
+                            }, {
+                                offset: 1,
+                                color: 'rgba(147, 235, 248, .2)' // 100% 处的颜色
+                            }],
+                            globalCoord: false // 缺省为 false
+                        },
+                        shadowColor: 'rgba(128, 217, 248, 1)',
+                        shadowOffsetX: -2,
+                        shadowOffsetY: 2,
+                        shadowBlur: 10                
+                    },
+
+                    emphasis: {
+                        label:{
+                            show:false
+                        },
+                        itemStyle:{
+                            areaColor: '#389BB7',
+                            borderWidth: 0
+                        }
+                    }
+                },
+                series:[{
+                    type:'effectScatter',
+                    coordinateSystem:'geo',
+                    label:{
+                        show:true,
+                        position:'right',
+                        formatter:function(r) {
+                            return r.name
+                        }
+                    },
+                    z:100,
+                    itemStyle:{
+                        color:'yellow'
+                    },
+                    data:c_data
+                },{
+                    type:'effectScatter',
+                    coordinateSystem:'geo',
+                    z:100,
+                    label:{
+                        show:true,
+                        position:'right',
+                        formatter:function(r) {
+                            return r.name
+                        }
+                    },
+                    symbol:"arrow",
+                    symbolSize:[10,8],
+                    itemStyle:{
+                        color:'green'
+                    },
+                    data:j_data
+                },{
+                    type:'lines',
+                    coordinateSystem:'geo',
+                    effect:{
+                        show:true,
+                        symbol:'arrow',
+                        symbolSize:7
+                    },
+                    lineStyle:{
+                        curveness:0.3
+                    },
+                    data:coor
+                }]
+            }
+            ehc.setOption(options)
+        })
+       
+     </script>
+</body>
+</html>

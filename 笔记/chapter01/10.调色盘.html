@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/echarts.min.js"></script>
+</head>
+<body>
+    <div id="echs" style="width: 800px; height:600px"></div>
+    <script>
+        var idEchs = document.getElementById("echs")
+        var ehc = echarts.init(idEchs)
+        var options = {
+            title:{
+                text:"Echarts 扩展",
+                textStyle:{
+                    // 支持rgb rgba 十六进制
+                    color:'rgb(255,0,255)',
+                    fontSize:18
+                },
+                borderColor:'blue',
+                borderWidth:2,
+                borderRadius:5,
+                subtext:'副标题',
+                // subtextStyle:{
+                //     fontSize:10 
+                // },
+                left:'50%'
+            },
+            color:["#eee","rgb(255,255,255)","yellow"],
+            xAxis:{
+                type:'category',
+                data:['衬衫','羊毛衫','雪纺衫','裤子','高跟鞋','袜子'],
+                axisLine:{
+                    show:true,
+                    symbolOffset:[0,10],
+                    symbol:['none','arrow']
+                },
+                axisTick:{
+                    alignWithLabel:true
+                },
+                axisLabel:{
+                    rotate:30
+                },
+                name:'衣服品类',
+                nameTextStyle:{
+                    color:'green',
+                    fontSize:18,
+                },
+                nameRotate:-20,
+                nameLocation:'center',
+                offset:5,
+                nameGap:30
+            },
+            yAxis:{
+                type:'value',
+                name:'销量/个',
+                nameTextStyle:{
+                    color:'blue',
+                    fontWeight:600,
+                    borderWidth:1,
+                    borderColor:'green',
+                    borderType:'dashed',
+                    borderRadius:10,
+                    padding:5,
+                    align:'center'
+                },
+                axisLine:{
+                    show:true,
+                    symbolOffset:[0,10],
+                    symbol:['none','arrow']
+                },
+                axisTick:{
+                    show:true
+                },
+                axisLabel:{
+                    color:'rgb(255,0,255)'
+                },
+                min:50,
+                offset:5
+            },
+            series:[{
+                type:'bar',
+                colorBy:"data",
+                data:[120,200,150,90,75,110]
+            }]
+        }
+        ehc.setOption(options)
+     </script>
+</body>
+</html>

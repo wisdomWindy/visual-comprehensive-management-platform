@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/echarts.min.js"></script>
+</head>
+<body>
+    <button id="btn">控制图例1</button>
+    <div id="ec" style="width:600px;height:400px"></div>
+</body>
+<script>
+    var ech = document.getElementById("ec")
+    var btn = document.getElementById("btn")
+    var mychart = echarts.init(ech)
+    var options = {
+        xAxis:{
+            type:'category',
+            data:['2017','2018','2019','2020']
+        },
+        legend:{
+            selected:{
+                '第一季度': true,
+                '第三季度': true,
+                '第二季度': true
+            }
+        },
+        yAxis:{
+            type:"value"
+        },
+        series:[{
+            name:'第一季度',
+            type:'bar',
+            data:[20,35,10,38]
+        },{
+            type:'line',
+            name:'第二季度',
+            data:[30,45,20,58]
+        },{
+            type:'line',
+            name:'第三季度',
+            data:[35,55,30,48]
+        }]
+    }
+    mychart.setOption(options)
+    btn.onclick = function() {
+        var selec = mychart.getOption().legend[0].selected['第一季度']
+        var type = 'legendSelect'
+        if(selec) {
+            type= 'legendUnSelect'
+        }
+        mychart.dispatchAction({
+            type: type,
+            // 图例名称
+            name: '第一季度'
+        });
+    }
+
+    
+</script>
+</html>

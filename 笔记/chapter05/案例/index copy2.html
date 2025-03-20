@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/echarts.min.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 1920px;
+	        height: 1080px;
+            background-color: #141646;
+            color:#fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 75px;
+            width: 100%;
+            background: url(./imgs/01.png);
+        }
+        .header-l {
+            font-size: 20px;
+            margin-left: 59px;
+        }
+        .header-m {
+            font-size: 40px;
+            margin-right: 59px;
+        }
+        .header-r {
+            font-size: 20px;
+            margin-right: 59px;
+        }
+        .body {
+            margin-top: 33px;
+            display: flex;
+            height: 968px;
+            width: 1826px;
+            justify-content: space-between;
+        }
+        .body-left {
+            width: 1053px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            height: 100%;
+            align-content: space-between;
+        }
+        .body-left-1 {
+            width: 1053px;
+            height: 634px;
+            background-color: aliceblue;
+            position: relative;
+        }
+        .body-left-1 span:nth-child(1) {
+            position: absolute;
+            /* padding: 15px; */
+            padding: 40px 0 0 10px;
+            left: -3px;
+            top: -3px;
+            border-style: solid;
+            border-color: #2069f2;
+            /* 上右下左 */
+            border-width: 5px 0 0 5px;
+        }
+        .body-left-1 span:nth-child(2) {
+            position: absolute;
+            padding: 15px;
+            right: -3px;
+            top: -3px;
+            border-style: solid;
+            border-color: #2069f2;
+            /* 上右下左 */
+            border-width: 5px 5px 0 0;
+        }
+        .body-left-1 span:nth-child(3) {
+            position: absolute;
+            padding: 15px;
+            right: -3px;
+            bottom: -3px;
+            border-style: solid;
+            border-color: #2069f2;
+            /* 上右下左 */
+            border-width: 0 5px 5px 0;
+        }
+        .body-left-1 span:nth-child(4) {
+            position: absolute;
+            padding: 15px;
+            left: -3px;
+            bottom: -3px;
+            border-style: solid;
+            border-color: #2069f2;
+            /* 上右下左 */
+            border-width: 0 0 5px 5px;
+        }
+        .body-left-2 {
+            width: 465px;
+	        height: 311px;
+            background-color: aliceblue;
+        }
+        .body-left-3 {
+            width: 568px;
+	        height: 311px;
+            background-color: aliceblue;
+        }
+        .body-right {
+            width: 754px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .body-right-1 {
+            box-sizing: border-box;
+            width: 754px;
+	        height: 304px;
+            background-color: #121860;
+            border: solid 5px #023260;
+        }
+        .body-right-2 {
+            width: 754px;
+	        height: 310px;
+            box-sizing: border-box;
+            background-color: #121860;
+            border: solid 5px #023260;
+        }
+        .body-right-3 {
+            width: 755px;
+            height: 311px;
+            box-sizing: border-box;
+            background-color: #121860;
+            border: solid 5px #023260;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-l">202X年8月19日         星期三</div>
+            <div class="header-m">泰兴化工封闭管理后台</div>
+            <div class="header-r">23°     东风     空气佳     泰兴</div>
+        </div>
+        <div class="body">
+            <div class="body-left">
+                <div class="body-left-1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="body-left-2"></div>
+                <div class="body-left-3"></div>
+            </div>
+            <div class="body-right">
+                <div class="body-right-1">
+                    <span></span> <span></span>
+                    <div id="first" style="width: 100%; height: 100%;"></div>
+                </div>
+                <div class="body-right-2">
+                    <div id="second" style="width: 100%; height: 100%;"></div>
+                </div>
+                <div class="body-right-3">
+                    <div id="thrid" style="width: 100%; height: 100%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    // 南丁格尔图/饼图
+    var first = document.getElementById("first")
+    var mychart = echarts.init(first)
+    var options = {
+        title:{
+            text:'重点用能单位的能耗分析（单位：吨标准煤）',
+            textStyle:{
+                color:'#fff',
+                fontSize:20
+            },
+            padding:[9,0,12,16],
+            backgroundColor:{
+                type: 'linear',
+                x: 0,
+                y: 0,
+                x2: 1,
+                y2: 0,
+                colorStops: [{
+                    offset: 0, color: '#1b2a7b' // 0% 处的颜色
+                }, {
+                    offset: 1, color: '#111860' // 100% 处的颜色
+                }],
+                global: false // 缺省为 false
+            },
+            left:27,
+            top: 9
+        },
+        legend:{
+            itemWidth:36,
+            itemHeight:20,
+            itemGap:26,
+            formatter:function(r) {
+                console.log(r)
+                return '{aa|'+r+'}'
+            },
+            textStyle:{
+                width:26,
+                color:'#fff',
+                rich:{
+                    aa:{
+                        align:'center'
+                    }
+                    
+                }
+            },
+            top: 91,
+            left: 45,
+            width:"30%"
+        },
+        color:['#4590e1','#06e5b6','#fc4456','#2545be'],
+        series:[{
+            type:'pie',
+            roseType:true,
+            startAngle:125,
+            height:"80%",
+            center:[444.5,176.5],
+            label:{
+                formatter:function(r) {
+                    return '{a|' +r.name + '\n' + r.value +"%"+'}'
+                },
+                color:'#ffffff',
+                fontSize:14,
+                rich:{
+                    a:{
+                        align:'center'
+                    }
+                }
+            },
+            labelLine:{
+                length:20,
+                length2:80
+            },
+            radius:[22.5,"80%"],
+            data:[{name:"煤炭",value:9.26},{name:"电",value:18.52},
+                {name:"蒸汽",value:25.93},{name:"天然气",value:46.30}]
+        }]
+    }
+    mychart.setOption(options)
+    // 柱状图
+    var second = document.getElementById("second")
+    var mychart = echarts.init(second)
+    var options = {
+        title:{
+            text:'规上工业增量存量能耗对比',
+            textStyle:{
+                color:'#fff',
+                fontSize:20
+            },
+            padding:[9,0,12,16],
+            backgroundColor:{
+                type: 'linear',
+                x: 0,
+                y: 0,
+                x2: 1,
+                y2: 0,
+                colorStops: [{
+                    offset: 0, color: '#1b2a7b' // 0% 处的颜色
+                }, {
+                    offset: 1, color: '#111860' // 100% 处的颜色
+                }],
+                global: false // 缺省为 false
+            },
+            left:27,
+            top: 9
+        },
+        legend:{
+            left:492,
+            top:69,
+            itemWidth:36,
+            itemHeight:20,
+            itemGap:20,
+            textStyle:{
+                color:'#fff'
+            }
+        },
+        grid:{
+            top:100,
+            left:140,
+            right:27,
+            bottom:11,
+            containLabel:true
+        },
+        xAxis:{
+            type:'category',
+            axisTick:{
+                show:false
+            },
+            data:['电','煤炭','天然气','蒸汽'],
+            axisLabel:{
+                show:true,
+                fontSize:11,
+                color:'#fff'
+            },
+            axisLine:{
+                show:true,
+                lineStyle:{
+                    color:'#fff'
+                }
+                
+            }
+        },
+        yAxis:[{
+            type:'value',
+            name:'综合能耗（单位：吨标煤）',
+            nameTextStyle:{
+                fontSize:16,
+                color:'#fff'
+            },
+            min:0,
+            max:1000,
+            interval:250,
+            axisLine:{
+                show:true,
+                lineStyle:{
+                    color:'#fff'
+                }
+            }
+        },{
+            type:'value',
+            axisLine:{
+                show:true,
+                lineStyle:{
+                    color:'#fff'
+                }
+            }
+        }],
+        color:['#0d1a92','#0263ff'],
+        series:[{
+            name:'存能',
+            type:'bar',
+            barWidth:15,
+            label:{
+                show:true,
+                position:'top',
+                fontSize:11,
+                color:'#fff'
+            },
+            data:[312,614,880,300]
+        },{
+            name:'增能',
+            type:'bar',
+            barWidth:15,
+            label:{
+                show:true,
+                position:'top',
+                fontSize:11,
+                color:'#fff'
+            },
+            data:[356,550,200,400]
+        }]
+    }
+    mychart.setOption(options)
+
+    var thrid = document.getElementById("thrid")
+    var mychart = echarts.init(thrid)
+    var options = {
+        title: [{
+            text: '行业能耗结构分析（单位：标准煤）',
+            top:25,
+            left: 33,
+            textStyle: {
+                color: '#fff'
+            }
+        },{
+            text: '能耗结构分析',
+            top:"10%",
+            right: '20%',
+            textStyle: {
+                color: '#fff'
+            }
+        }],
+        legend: [{
+            show:true,
+            data:['蒸汽', '电', '煤炭', '天然气'],
+            textStyle: {
+                color: '#fff'
+            },
+            left: 60,
+            bottom: 0
+        },{
+            show:true,
+            data:['限上批零也', '规上服务业', '规上服务业', '化工企业'],
+            textStyle: {
+                color: '#fff'
+            },
+            right: 40,
+            bottom: 0
+        }],
+        color:["#06e5b6", "#fc4456", "#2545be", "#4590e1"],
+        series: [
+            {
+                type: 'pie',
+                radius: [20.5, 90],
+                center: [240.5, 189.5],
+                roseType: 'radius',
+                label:{
+                    show:true,
+                    formatter:function(r) {
+                        return '{a|' +r.name + '\n' + r.value +"%"+'}'
+                    },
+                    position:'inside',
+                    height:50,
+                    color:'#ffffff',
+                    fontSize:14,
+                    rich:{
+                        a:{
+                            align:'center'
+                        }
+                    }
+                },
+                clockwise:false,
+                startAngle:245,
+                data:  [
+                    {
+                        value: 21.43,
+                        name: '蒸汽'
+                    },
+                    {
+                        value: 21.43,
+                        name: '电',
+                        label:{
+                            position:'inside',
+                            height:50
+                        },
+                    },
+                    {
+                        value: 42.86,
+                        name: '煤炭'
+                    },
+                    {
+                        value: 14.29,
+                        name: '天然气',
+                        label:{
+                            position:'inside',
+                            height:-10
+                        },
+                    }
+                ].sort((a, b) => a.value - b.value)
+            },
+            {
+                type: 'pie',
+                radius: [20, 90],
+                center: ['75%', 189.5],
+                roseType: 'radius',
+                label:{
+                    show:true,
+                    formatter:function(r) {
+                        return '{a|' +r.name + '\n' + r.value +"%"+'}'
+                    },
+                    position:'inside',
+                    height:50,
+                    color:'#ffffff',
+                    fontSize:14,
+                    rich:{
+                        a:{
+                            align:'center'
+                        }
+                    }
+                },
+                data:  [
+                    {
+                        value: 7.04,
+                        name: '限上批零也',
+                        label:{
+                            position:'inside',
+                            height:100
+                        },
+                    },
+                    {
+                        value: 42.25,
+                        name: '规上服务业'
+                    },
+                    {
+                        value: 21.13,
+                        name: '非化工企业'
+                    },
+                    {
+                        value: 29.58,
+                        name: '化工企业'
+                    }
+                ]
+            }
+        ]
+    }
+    mychart.setOption(options)
+</script>
+</html>

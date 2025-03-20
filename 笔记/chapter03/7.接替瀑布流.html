@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/echarts.min.js"></script>
+</head>
+<body>
+    <div id="ec" style="width:600px;height:400px"></div>
+</body>
+<script>
+    var ech = document.getElementById("ec")
+    var mychart = echarts.init(ech)
+    var options = {
+        xAxis:{
+            type:'category',
+            data:['周一','周二','周三','周四','周五','周六']
+        },
+        tooltip:{
+            trigger:'axis',
+            axisPointer:{
+                type:'shadow'
+            },
+            formatter:function(r) {
+                console.log(r[1])
+                return r[1].name + r[1].seriesName+r[1].value
+            }
+        },
+        yAxis:{
+            type:'value'
+        },
+        series:[{
+            type:'bar',
+            stack:'a',
+            data:[0,1700,1400,1200,300,0],
+            itemStyle:{
+                color:'transparent'
+            }
+        },{
+            type:'bar',
+            stack:'a',
+            name:'life cost',
+            data:[2900,1200,300,200,900,300],
+            label:{
+                show:true
+            }
+        }]
+    }
+    mychart.setOption(options)
+</script>
+</html>

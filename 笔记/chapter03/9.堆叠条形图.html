@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/echarts.min.js"></script>
+</head>
+<body>
+    <div id="ec" style="width:600px;height:400px"></div>
+</body>
+<script>
+    var ech = document.getElementById("ec")
+    var mychart = echarts.init(ech)
+    var options = {
+        title:{
+            text:'销量'
+        },
+        legend:{},
+        tooltip:{
+            trigger: 'axis',
+            axisPointer:{
+                type:'shadow'
+            }
+        },
+        xAxis:{
+            type:'value'
+        },
+        yAxis:{
+            type:'category',
+            data:['周一','周二','周三','周四','周五','周六','周末']
+        },
+        series:[{
+            name:'羊毛衫',
+            type:'bar',
+            stack:'a',
+            label:{
+                show:true
+            },
+            data:[50,80,90,23,67,50,32]
+        },{
+            name:'羽绒服',
+            type:'bar',
+            stack:'a',
+            label:{
+                show:true
+            },
+            data:[60,10,40,53,17,100,62]
+        },{
+            name:'T恤衫',
+            type:'bar',
+            stack:'a',
+            label:{
+                show:true
+            },
+            data:[60,30,10,63,17,40,22]
+        },{
+            name:'棉袄',
+            type:'bar',
+            stack:'a',
+            label:{
+                show:true
+            },
+            data:[10,19,40,53,17,10,62]
+        }]
+    }
+    mychart.setOption(options)
+</script>
+</html>

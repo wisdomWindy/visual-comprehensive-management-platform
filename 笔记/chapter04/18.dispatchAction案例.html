@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/echarts.min.js"></script>
+</head>
+<body>
+    <div id="ec" style="width:600px;height:400px"></div>
+</body>
+<script>
+    var ech = document.getElementById("ec")
+    var btn = document.getElementById("btn")
+    var mychart = echarts.init(ech)
+    var options = {
+            title: {
+                text: '饼图程序调用高亮示例',
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: '{a} <br/>{b} : {c} ({d}%)'
+            },
+            legend: {
+                orient: 'vertical',
+                left: 'left',
+                data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
+            },
+            series: [
+            {
+                name: '访问来源',
+                type: 'pie',
+                radius: '55%',
+                center: ['50%', '60%'],
+                data: [
+                    { value: 335, name: '直接访问'},
+                    { value: 310, name: '邮件营销' },
+                    { value: 234, name: '联盟广告' },
+                    { value: 135, name: '视频广告' },
+                    { value: 1548, name: '搜索引擎' }
+                ],
+                emphasis: {
+                    itemStyle: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }]
+        };
+
+    mychart.setOption(options)
+    var currentIndex = -1
+    setInterval(()=>{
+        var opt = mychart.getOption().series[0].data.length -1
+        // console.log(opt)
+        // console.log(currentIndex)
+        
+        mychart.dispatchAction({
+            type: 'downplay',
+            seriesIndex:0,
+            dataIndex:currentIndex
+        })
+        if(currentIndex == opt) {
+            currentIndex = -1
+        }
+        currentIndex++
+        mychart.dispatchAction({
+            type: 'highlight',
+            seriesIndex:0,
+            dataIndex:currentIndex
+        })
+        mychart.dispatchAction({
+            type: 'showTip',
+            seriesIndex: 0,
+            dataIndex: currentIndex,
+        })
+    },1000)
+    
+</script>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/echarts.min.js"></script>
+</head>
+<body>
+    <div id="ec" style="width:600px;height:400px"></div>
+</body>
+<script>
+    var ech = document.getElementById("ec")
+    var mychart = echarts.init(ech)
+    var options = {
+        series:[
+            {
+            name:"时针",
+            type:'gauge',
+            startAngle:90,
+            endAngle:-270,
+            max:12,
+            min:0,
+            splitNumber:12,
+            pointer:{
+                width:4,
+                length:'45%',
+                offsetCenter:[0,'8%'],
+                itemStyle:{
+                    color:'#c0911f',
+
+                }
+            },
+            aixsLine:{
+                width:20
+            },
+            axisLabel:{
+                formatter: function (value) {
+                    if(value == 0) {
+                        return ''
+                    }
+                    return value;
+                }
+            },
+            detail:{
+                show:false
+            },
+            data:[{value:t()[2]}]
+        }
+        ,{
+            name:"分针",
+            type:'gauge',
+            min:0,
+            max:60,
+            startAngle:90,
+            endAngle:-270,
+            pointer:{
+                show:true,
+                width:3,
+                length:'65%',
+                offsetCenter:[0,'8%'],
+                itemStyle:{
+                    color:'#c0911f',
+                }
+            },
+            detail:{
+                show:false
+            },
+            axisLabel:{
+                show:false
+            },
+            axisTick:{
+                show:false
+            },
+            aixsLine:{
+                show:false
+            },
+            splitLine:{
+                show:false
+            },
+            data:[{value:t()[1]}]
+        },,{
+            name:"秒针",
+            type:'gauge',
+            min:0,
+            max:60,
+            startAngle:90,
+            endAngle:-270,
+            pointer:{
+                show:true,
+                width:2,
+                length:'75%',
+                offsetCenter:[0,'8%'],
+                itemStyle:{
+                    color:'#c0911f',
+                }
+            },
+            detail:{
+                show:false
+            },
+            axisLabel:{
+                show:false
+            },
+            axisTick:{
+                show:false
+            },
+            aixsLine:{
+                show:false
+            },
+            splitLine:{
+                show:false
+            },
+            data:[{value:t()[0]}]
+        }]
+    }
+    mychart.setOption(options)
+    function t() {
+        var d = new Date()
+        var seconds = d.getSeconds()
+        var minute = d.getMinutes() + seconds/60
+        var hour = d.getHours()%12 + minute/60
+        return [seconds,minute,hour]
+    }
+    setInterval(()=>{
+        var time = t()
+        var options = {
+            series:[{
+                data:[{value:t()[2]}]
+            },{
+                data:[{value:t()[1]}]
+            },{
+                data:[{value:t()[0]}]
+            }]
+        }
+        mychart.setOption(options)
+    }, 1000)
+</script>
+</html>

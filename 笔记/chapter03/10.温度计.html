@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/echarts.min.js"></script>
+</head>
+<body>
+    <div id="ec" style="width:600px;height:400px"></div>
+</body>
+<script>
+    var ech = document.getElementById("ec")
+    var mychart = echarts.init(ech)
+    var options = {
+        legend:{
+          align:'left',
+          orient:'vertical',
+          left:"0%"
+        },
+        title:{
+            textAlign:'center',
+            left:"50%",
+            text:"衣服销量",
+            subtext:"第一季度"
+        },
+        series: [
+            {
+            type: 'pie',
+            // radius: '50%',
+            radius: ['40%', '60%'],
+            roseType: 'area',
+
+            data: [
+                { value: 1048, name: 'Search Engine' },
+                { value: 735, name: 'Direct' },
+                { value: 580, name: 'Email' },
+                { value: 484, name: 'Union Ads' },
+                { value: 300, name: 'Video Ads' }
+            ]
+            }
+        ]
+    }
+
+    mychart.setOption(options)
+</script>
+</html>

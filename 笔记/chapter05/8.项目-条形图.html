@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/echarts.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js">
+    </script>
+</head>
+<body>
+    <div id="echs" style="width: 1000px; height: 600px;"></div>
+    <script>
+        var lineDataAxis = ["0时","1时","2时","3时","4时","5时","6时","7时","8时","9时","10时","11时",
+        "12时","13时","14时","15时","16时","17时","18时","19时","20时","21时","22时","23时"
+    ]
+    var lineData1=[10,12,13,12,14,14,16,17,18,20,22,26,27,26,23,20,18,18,16,16,14,13,12,10];
+    var lineData2=[11,12,14,12,15,13,16,16,16,21,22,24,22,24,23,21,19,18,15,14,15,13,12,11];
+        var c_data = [
+                {name: "主卧1",value: [116.409, 39.921,40]},
+                {name: "主卧2",value: [116.409, 39.935,30]},
+                {name: "书房",value: [116.432, 39.939,20]},
+                {name: "卫生间",value: [116.4516, 39.939,11]},
+                {name: "客厅1", value: [116.41, 39.9036,13]},
+                {name: "客厅2", value:[116.43, 39.918,14]},
+                {name: "客厅3",value: [116.4516, 39.9306,11]},
+                {name: "次卧",value:  [116.4516, 39.920,12]},
+                {name: "楼梯",value:  [116.447, 39.911,13]},
+                {name: "厨房",value:  [116.4516, 39.905,41]},
+            ]
+        var barData = c_data.map((r)=>r.name)
+        var barVal = c_data.map((r)=>r.value[2])
+       
+        var j_data = [
+            {"name": "基站1","value": [116.415,39.915,0]},
+            {"name": "基站2","value": [116.448,39.935,0]},
+            {"name": "基站3","value": [116.455, 39.915,0]},
+            {"name": "控制中心","value": [116.435,39.925,0]},
+        ]
+        var coor = [
+            [
+                {"coord": [116.41,39.9036],"value": 20},
+                {"coord": [116.415,39.915]}
+            ],
+            [
+                {"coord": [116.43,39.918],"value": 25},
+                {"coord": [116.415,39.915]}
+            ],
+            [
+                {"coord": [116.409,39.921],"value": 17},
+                {"coord": [116.415,39.915]}
+            ],
+            [
+                {"coord": [116.409,39.935],"value": 19},
+                {"coord": [116.415,39.915]}
+            ]
+            ]
+        var idEchs = document.getElementById("echs")
+        var ehc = echarts.init(idEchs)
+        $.getJSON("./js/home.json",function(r) {
+            echarts.registerMap("home",r)
+            var options = {
+                backgroundColor:'#003455',
+                legend: [{
+                    data:["历史平均数据1","历史平均数据2"],
+                    top:'60%',
+                    left:'73%',
+                    textStyle:{
+                        color:'#fff'
+                    },
+                    selected:{
+                        "主卧":false,
+                        "书房控制":false
+                    }
+                },{
+                    data:["传感器","基站","传输路线"],
+                    top:'10%',
+                    textStyle:{
+                        color:'#fff'
+                    },
+                    left:'35%',
+                    selected:{
+                        "主卧":false,
+                        "书房控制":false
+                    }
+                },{
+                    data:["主卧","书房控制"],
+                    orient:'vertical',
+                    top:'7%',
+                    left:'5%',
+                    textStyle:{
+                        color:'#eee'
+                    },
+                    selected:{
+                        "主卧":false,
+                        "书房控制":false
+                    }
+                }],
+                visualMap:{
+                    text:['hight','low'],
+                    min:-5,
+                    max:45,
+                    inRange:{
+                        color:['#59a4b1','#eac636','#db5a5a']
+                    },
+                    calculable:true,
+                    right:'5%',
+                    bottom:'40%',
+                    textStyle:{
+                        color:'#fff'
+                    }
+                },
+                title:[{
+                    text:"传感器布设平面图",
+                    textStyle:{
+                        color:'#fff',
+                        fontSize:25
+                    },
+                    left:'16%',
+                    top:'5%'
+                },{
+                    text:"温度（℃）数据统计情况",
+                    textStyle:{
+                        color:'#fff',
+                        fontSize:25
+                    },
+                    left:'60%',
+                    top:'5%'
+                },{
+       text: "平均值：",
+       left: '60%',
+       top: '14.5%',
+       textStyle: {
+           color: '#90ee90',
+           fontSize: 15
+       }
+     },
+     {
+        text: "最大值：",
+        left: '72%',
+        top: '14.5%',
+        textStyle: {
+            color: '#FF4500',
+            fontSize: 15
+        }
+     },
+     {
+         text: "最小值：",
+         left: '84%',
+         top: '14.5%',
+         textStyle: {
+             color: '#87CEFF',
+             fontSize: 15
+         }
+      },
+      {
+         text: "未使用的传感器：",
+         left: '60%',
+         top: '17.5%',
+      	 textStyle: {
+         	 color: '#FF7F00',
+             fontSize: 15
+         },
+       },
+       {
+          text: "数据异常传感器：",
+          left: '76%',
+          top: '17.5%',
+          textStyle: {
+              color: '#9370DB',
+              fontSize: 15
+          },
+        },
+        {
+           text: "(数据正常范围：",
+           left: '60%',
+           top: '20.5%',
+           textStyle: {
+               color: '#FFA54F',
+               fontSize: 15
+           },
+         },
+         {
+           text: "未使用的传感器：",
+           left: '60%',
+           top: '23.5%',
+           textStyle: {
+               color: '#FF7F00',
+               fontSize: 15
+           },
+          }, 
+		  {
+            text: "数据异常传感器：" ,
+            left: '60%',
+            top: '26.5%',
+           	textStyle: {
+                color: '#9370DB',
+                fontSize: 15
+      		},
+   		 }],
+                geo:{
+                    map:"home",
+                    zoom:0.8,
+                    show:true,
+                    center: [116.453, 39.920],
+                    itemStyle: {
+                        borderColor: 'rgba(147, 235, 248, 1)',
+                        borderWidth: 1,
+                        areaColor: {
+                            type: 'radial',
+                            x: 0.5,
+                            y: 0.5,
+                            r: 0.8,
+                            colorStops: [{
+                                offset: 0,
+                                color: 'rgba(147, 235, 248, 0)' // 0% 处的颜色
+                            }, {
+                                offset: 1,
+                                color: 'rgba(147, 235, 248, .2)' // 100% 处的颜色
+                            }],
+                            globalCoord: false // 缺省为 false
+                        },
+                        shadowColor: 'rgba(128, 217, 248, 1)',
+                        shadowOffsetX: -2,
+                        shadowOffsetY: 2,
+                        shadowBlur: 10                
+                    },
+
+                    emphasis: {
+                        label:{
+                            show:false
+                        },
+                        itemStyle:{
+                            areaColor: '#389BB7',
+                            borderWidth: 0
+                        }
+                    }
+                },
+                grid:[{
+                    left:'65%',
+                    top:'34%',
+                    bottom:'44%',
+                    width:'20%'
+                },{
+                    left:'65%',
+                    top:'65%',
+                    bottom:'10%',
+                    right:'3%',
+                }],
+                xAxis:[{
+                    type:'value',
+                    position:'top',
+                    splitLine:{
+                        show:false
+                    },
+                    axisLabel:{
+                        show:true,
+                        textStyle:{
+                            color:'#ddd'
+                        }
+                    }
+                },{
+                    gridIndex:1,
+                    type:'category',
+                    data:lineDataAxis
+                }],
+                yAxis:[{
+                    axisTick:{
+                        show:false
+                    },
+                    axisLabel:{
+                        interval:0,
+                        textStyle:{
+                            color:'#ddd'
+                        }
+                    },
+                    type:'category',
+                    data:barData
+                },{
+                    gridIndex:1,
+                    type:'value'
+                }],
+                series:[{
+                    type:'bar',
+                    data:barVal.sort()
+                },{
+                    name:'历史平均数据2',
+                    xAxisIndex:1,
+                    yAxisIndex:1,
+                    type:'line',
+                    data:lineData1,
+                    markLine:{
+                        data: [{
+                            name: '平均线',
+                            // 支持 'average', 'min', 'max'
+                            type: 'average'
+                        }]
+                    },
+                    markPoint:{
+                        data: [
+                            {
+                                name: '最大值',
+                                type: 'max'
+                            }, 
+                            {
+                                name: '最小值',
+                                type: 'min'
+                            }, 
+                        ],
+                        itemStyle:{
+                            color:'#d0648a'
+                        }
+                    }
+                },{
+                    name:'历史平均数据1',
+                    xAxisIndex:1,
+                    yAxisIndex:1,
+                    type:'line',
+                    data:lineData2,
+                    markLine:{
+                        data: [{
+                            name: '平均线',
+                            // 支持 'average', 'min', 'max'
+                            type: 'average'
+                        }]
+                    },
+                    markPoint:{
+                        data: [
+                            {
+                                name: '最大值',
+                                type: 'max'
+                            }, 
+                            {
+                                name: '最小值',
+                                type: 'min'
+                            }, 
+                        ],
+                        itemStyle:{
+                            color:'#d0648a'
+                        }
+                    }
+                },{
+                    name:'传感器',
+                    type:'effectScatter',
+                    coordinateSystem:'geo',
+                    label:{
+                        show:true,
+                        position:'right',
+                        formatter:function(r) {
+                            return r.name
+                        }
+                    },
+                    z:100,
+                    itemStyle:{
+                        color:'yellow'
+                    },
+                    data:c_data
+                },{
+                    name:'基站',
+                    type:'effectScatter',
+                    coordinateSystem:'geo',
+                    z:100,
+                    label:{
+                        show:true,
+                        position:'right',
+                        formatter:function(r) {
+                            return r.name
+                        }
+                    },
+                    symbol:"arrow",
+                    symbolSize:[10,8],
+                    itemStyle:{
+                        color:'green'
+                    },
+                    data:j_data
+                },{
+                    name:'传输路线',
+                    type:'lines',
+                    coordinateSystem:'geo',
+                    effect:{
+                        show:true,
+                        symbol:'arrow',
+                        symbolSize:7
+                    },
+                    lineStyle:{
+                        curveness:0.3
+                    },
+                    data:coor
+                },{
+                    name:'主卧',
+                    type:'effectScatter',
+                    coordinateSystem:'geo',
+                    symbol:'rect',
+                    symbolSize:[10,8],
+                    label:{
+                        show:true,
+                        position:'right',
+                        formatter:function(r) {
+                            console.log(r)
+                            return r.name +"空调调温：" + "开"
+                        }
+                    },
+                    emphasis:{
+                        label:{
+                            show:true,
+                            formatter:function(r) {
+                                return r.name +"温度（℃）" + 17
+                            }
+                        },
+                        itemStyle:{
+                            color:'red'
+                        }
+                    },
+                    z:100,
+                    itemStyle:{
+                        color:'#50a3ba'
+                    },
+                    data:[{name:'主卧',value:[116.409, 39.928]}]
+                },{
+                    name:'书房控制',
+                    type:'effectScatter',
+                    coordinateSystem:'geo',
+                    symbol:'rect',
+                    symbolSize:[10,8],
+                    label:{
+                        show:true,
+                        position:'right',
+                        formatter:function(r) {
+                            console.log(r)
+                            return r.name +"空调调温：" + "开"
+                        }
+                    },
+                    emphasis:{
+                        label:{
+                            show:true,
+                            formatter:function(r) {
+                                return r.name +"温度（℃）" + 17
+                            }
+                        },
+                        itemStyle:{
+                            color:'red'
+                        }
+                    },
+                    z:100,
+                    itemStyle:{
+                        color:'#50a3ba'
+                    },
+                    data:[{name:'书房控制',value:[116.428, 39.939]}]
+                }]
+            }
+            ehc.setOption(options)
+        })
+       
+     </script>
+</body>
+</html>

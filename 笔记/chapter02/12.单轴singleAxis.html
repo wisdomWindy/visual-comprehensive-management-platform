@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/echarts.min.js"></script>
+</head>
+<body>
+    <div id="ec" style="width:600px;height:400px"></div>
+</body>
+<script>
+    var ech = document.getElementById("ec")
+    var myCh = echarts.init(ech)
+    var options = {
+        // singleAxis:{
+        //     height:10,
+        //     type:'category',
+        //     width:400,
+        //     axisTick:{
+        //         alignWithLabel:true
+        //     },
+        //     data:["第一季度","第二季度","第三季度","第四季度"]
+        // },
+        // series:[{
+        //     type:'scatter',
+        //     coordinateSystem:'singleAxis',
+        //     data:[0,1,2,3]
+        // }]
+        singleAxis:[{
+            height:10,
+            type:'category',
+            width:400,
+            axisTick:{
+                alignWithLabel:true
+            },
+            data:["第一季度","第二季度","第三季度","第四季度"]
+        },
+        {
+            top:50,
+            height:10,
+            type:'category',
+            width:400,
+            axisTick:{
+                alignWithLabel:true
+            },
+            data:["第一季度","第二季度","第三季度","第四季度"]
+        }
+        ],
+        series:[{
+            singleAxisIndex:0,
+            type:'scatter',
+            coordinateSystem:'singleAxis',
+            data:[0,1,2,3]
+        },{
+            singleAxisIndex:1,
+            type:'scatter',
+            coordinateSystem:'singleAxis',
+            data:[0,1,2,3]
+        }]
+    }
+    myCh.setOption(options)
+</script>
+</html>

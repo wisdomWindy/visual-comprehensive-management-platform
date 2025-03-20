@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/echarts.min.js"></script>
+</head>
+<body>
+    <div id="echs"></div>
+    <script>
+        var idEchs = document.getElementById("echs")
+        var ehc = echarts.init(idEchs)
+        // ehc.resize({
+        //     width:600,
+        //     height:400
+        // })
+        // 监听窗口
+        window.onresize =function() {
+            // console.log('宽度',window.innerWidth)
+            // console.log('高度',window.innerHeight)
+            ehc.resize({
+                width:window.innerWidth,
+                height:window.innerHeight
+            })
+        }
+        window.onresize()
+
+        var options = {
+            media:[{
+                query:{
+                    maxWidth:800,   // 和
+                    // maxHeight:600
+                },
+                option:{
+                    legend:{
+                        orient:'vertical',
+                        right:50
+                    },
+                    series:[{
+                        id:'a',
+                        name:'2122',
+                        data:[11,33,22]
+                    }]
+                }
+            },{
+                query:{
+                    minWidth:800,   // 和
+                    // maxHeight:600
+                },
+                option: {
+                    legend:{ 
+                        orient:'horizontal',
+                        right:'50%',
+                        // align:'center'
+                    },
+                    series:[{
+                        id:'a',
+                        name:'2021',
+                        data:[10,14,23]
+                    }]
+                }
+            }],
+            legend:{},
+            xAxis:{
+                type:'category',
+                data:['星期一','星期二','星期三'],
+                name:'x轴'
+            },
+            yAxis:{
+                type:'value',
+                name:'y轴'
+            },
+            series:[{
+                id:'a',
+                name:'2021',
+                type:'bar',
+                data:[10,14,23]
+            },{
+                name:'2022',
+                type:'bar',
+                data:[10,14,23]
+            },{
+                name:'2023',
+                type:'bar',
+                data:[10,14,23]
+            }]
+        }
+        ehc.setOption(options)
+     </script>
+</body>
+</html>

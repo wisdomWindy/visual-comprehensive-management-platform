@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/echarts.min.js"></script>
+</head>
+<body>
+    <div id="ec" style="width:600px;height:400px"></div>
+</body>
+<script>
+    var ech = document.getElementById("ec")
+    var mychart = echarts.init(ech)
+    /*
+    var sData = [
+            { name: 'ie8', min: 0},
+            { name: 'ie8-', min: 0}, // 标签设置为红色
+            { name: 'chrome', min: 0},
+            { name: '苹果', min: 0},
+            { name: '火狐', min: 0},
+        ]
+    // 数据变化的公式
+    var seriesData = [] 
+    for(var i = 0;i<=20;i++) {
+        seriesData.push({
+            value : [ (40 - i) * 10,
+                    (38 - i) * 4 + 60,
+                    i * 5 + 10,
+                    i * 9,
+                    (i * i) / 2],
+            name: i + 2000 + ''
+        })
+    }
+    */
+    var seriesData = [] 
+    for(var i = 0;i<=20;i++) {
+        seriesData.push({
+            value : [ (40 - i) * 10,
+                    (38 - i) * 4 + 60,
+                    i * 5 + 10,
+                    i * 9,
+                    (i * i) / 2],
+            name: i + 2000 + ''
+        })
+    }
+    console.log(seriesData)
+    var sData = [
+            { name: 'ie8', min: 0},
+            { name: 'ie8-', min: 0}, // 标签设置为红色
+            { name: 'chrome', min: 0},
+            { name: '苹果', min: 0},
+            { name: '火狐', min: 0},
+        ]
+        var datas = (function(){
+            return 1+4
+        })()
+        // [2000,2001,2002]
+    var options = {
+        radar:{
+            indicator:sData
+        },
+        visualMap:{
+            color:['red','yellow'],
+            calculable:true,
+            right:10,
+            top:'30%'
+        },
+        legend:{
+            type:'scroll',
+            bottom:10,
+            data:(function(){
+                var s = []
+                for(var i = 0;i<=20;i++) {
+                    s.push(i + 2000)
+                }
+            })()
+        },
+        tooltip:{},
+        series:[{
+            type:'radar',
+            symbol:'none',
+            emphasis:{
+                areaStyle:'rgba(0,250,0,0,0.5)'
+            },
+            data:seriesData
+        }]
+    }
+    mychart.setOption(options)
+</script>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/echarts.min.js"></script>
+</head>
+<body>
+    <div id="ec" style="width:600px;height:400px"></div>
+</body>
+<script>
+    var ech = document.getElementById("ec")
+    var mychart = echarts.init(ech)
+    var options = {
+        title:{
+            text:'衣服品牌销量',
+            textAlign:'center',
+            left:'50%',
+            subtext:'第一季度'
+        },
+        tooltip:{},
+        legend:{
+            align:'left',
+            orient:'vertical',
+            left:0
+        },
+        series:[{
+            type:'pie',
+            startAngle:180,
+            radius:["15%","60%"],
+            data:[{value:10,name:'安踏'},
+            {value:20,name:'七匹狼'},
+            {value:15,name:'波司登'},
+            {value:5,name:'浪莎'},
+            {value:50,name:'红豆'},
+            {value: 10+20+15+5+50,itemStyle:{
+                color:'none'
+            }}
+            ]
+        }]
+    }
+    mychart.setOption(options)
+</script>
+</html>

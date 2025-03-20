@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/echarts.min.js"></script>
+</head>
+<body>
+    <div id="ec" style="width:600px;height:400px"></div>
+</body>
+<script>
+    var ech = document.getElementById("ec")
+    var mychart = echarts.init(ech)
+    // 语文 150 数学 150 英语 120
+    var options = {
+        backgroundColor:'#23243a',
+        radar:{
+            indicator: [
+                { name: '销售', max: 6500,color:'#eee'},
+                { name: '管理', max: 16000,color:'#eee'}, // 标签设置为红色
+                { name: '信息技术', max: 30000,color:'#eee'},
+                { name: '客服', max: 38000,color:'#eee'},
+                { name: '研发', max: 52000,color:'#eee'},
+                { name: '市场', max: 25000,color:'#eee'}
+            ],
+            shape:'circle',
+            axisLine:{
+                lineStyle:{
+                    color:'#0a535b'
+                }
+            },
+            splitLine:{
+                lineStyle:{
+                    color:'#0a535b',
+                    width:2
+                }
+            },
+            splitArea:{
+                areaStyle:{
+                    color:'transparent'
+                }
+            }
+        },
+        title:{
+            text:'雷达图'
+        },
+        legend:{
+            right:10,
+            data:[{
+                name:'预算分配（Allocated Budget）',
+                icon:'circle',
+                itemStyle:{
+                    color:'#327bfa'
+                },
+                textStyle:{
+                    color:'#eee'
+                }
+            }]
+        },
+        series:[{
+            type:'radar',
+            lineStyle:{
+                color:'red'
+            },
+            symbolSize:4,
+            itemStyle:{
+                color:'white'
+            },
+            areaStyle:{
+                color:'#2a4c93'
+            },
+            // name:
+            data:[
+                {
+                    value : [4300, 1000, 28000, 35000, 50000, 19000],
+                    name : '预算分配（Allocated Budget）'
+                }
+            ]
+        }]
+    }
+    mychart.setOption(options)
+</script>
+</html>

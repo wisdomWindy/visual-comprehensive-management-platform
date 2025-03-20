@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/echarts.min.js"></script>
+</head>
+<body>
+    <div id="ec" style="width:600px;height:400px"></div>
+</body>
+<script>
+    var ech = document.getElementById("ec")
+    var myCh = echarts.init(ech)
+    var options = {
+        // polar:{
+        //     radius:["30%","80%"]
+        // },
+        // radiusAxis:{
+        //     type:'category',
+        //     data:['第一季度','第二季度','第三季度']
+        // },
+        // angleAxis:{
+        //     max:100,
+        // },
+        // series:[{
+        //     type:'bar',
+        //     name:'裤子',
+        //     coordinateSystem:'polar',
+        //     data:[45,85,95]
+        // }]
+        polar:[{
+            radius:["50%","80%"]
+        },{
+            center:["40%","50%"],
+            radius:["10%","20%"]
+        }],
+        radiusAxis: [{
+            polarIndex:0,
+            type:'category',
+            data:['第一季度','第二季度','第三季度']
+        },{
+            polarIndex:1,
+            type:'category',
+            data:['第一季度1','第二季度1','第三季度1']
+        }],
+        angleAxis: [{
+            polarIndex:0,
+            max:100,
+        },{
+            polarIndex:1,
+            max:10,
+        }],
+        series:[{
+            type:'bar',
+            name:'裤子',
+            polarIndex:0,
+            coordinateSystem:'polar',
+            data:[45,85,95]
+        },{
+            type:'bar',
+            name:'裤子',
+            polarIndex:1,
+            coordinateSystem:'polar',
+            data:[4.5,8.5,9.5]
+        }]
+    }
+    myCh.setOption(options)
+</script>
+</html>

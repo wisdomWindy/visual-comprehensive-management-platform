@@ -1,0 +1,102 @@
+<template>
+ <div class="index-compare" ref="indexCompare">
+
+ </div>
+</template>
+
+<script setup>
+import useEcharts from '@/hooks/useEcharts'
+const category = ['北京','上海','深圳','广州','杭州','苏州','合肥']
+const {container:indexCompare} = useEcharts({
+  grid:{
+    left:'20%',
+    top:'25%',
+    bottom:'10%'
+  },
+  legend:{
+    itemWidth:22,
+    itemHeight:12,
+    right:'10%',
+    top:'3%',
+    icon:'rect',
+    textStyle:{
+      color:'#fff'
+    },
+    data:[{
+      name:'收入',
+      itemStyle:{
+        borderColor:'#3DBDFF',
+        color:'rgba(61,197,255,0.16)'
+      }
+    },{
+      name:'支出',
+      itemStyle:{
+        borderColor:'#FFA129',
+        color:'rgba(255,164,41,0.16)'
+      }
+    }]
+  },
+  xAxis:{
+    type:'category',
+    data:category,
+    axisTick:{
+      show:false
+    },
+    axisLine:{
+      lineStyle:{
+        color:'#464849'
+      }
+    },
+    axisLabel:{
+      color:'#DAF4FF'
+    }
+  },
+  yAxis:{
+    type:'value',
+    name:'单位:指数',
+    nameTextStyle:{
+      color:'#fff'
+    },
+    axisLine:{
+      lineStyle:{
+         color:'#464849'
+      }
+    },
+    axisLabel:{
+      color:'#DAF4FF'
+    },
+    axisTick:{
+      show:false
+    },
+    splitLine:{
+      show:false
+    }
+  },
+  series:[{
+    type:'bar',
+    name:'收入',
+    data:[2.5,1.5,2.0,2.9,2.7,2.4,1.1],
+    itemStyle:{
+      color:'rgba(61,197,255,0.16)',
+      borderWidth:1,
+      borderColor:'#3DBDFF'
+    }
+  },{
+    type:'bar',
+    name:'支出',
+    data:[1.4,1.8,0.7,2.6,2.3,2.0,1.0],
+    itemStyle:{
+      color:'rgba(255,164,41,0.16)',
+      borderWidth:1,
+      borderColor:'#FFA129'
+    }
+  }]
+})
+</script>
+
+<style scoped>
+.index-compare{
+  width:100%;
+  height:80%;
+}
+</style>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/echarts.min.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 1920px;
+	        height: 1080px;
+            background-color: #141646;
+            color:#fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-sizing: border-box;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 75px;
+            width: 100%;
+            background: url(./imgs/01.png);
+        }
+        .header-l {
+            font-size: 20px;
+            margin-left: 59px;
+        }
+        .header-m {
+            font-size: 40px;
+            margin-right: 59px;
+        }
+        .header-r {
+            font-size: 20px;
+            margin-right: 59px;
+        }
+        .body {
+            margin-top: 33px;
+            display: flex;
+            height: 968px;
+            width: 1826px;
+            justify-content: space-between;
+        }
+        .body-left {
+            width: 1053px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            height: 100%;
+            align-content: space-between;
+        }
+        .body-left-1 {
+            width: 1053px;
+            height: 634px;
+            background-color: aliceblue;
+            position: relative;
+        }
+        .body-left-1 span:nth-child(1) {
+            position: absolute;
+            /* padding: 15px; */
+            padding: 40px 0 0 10px;
+            left: -3px;
+            top: -3px;
+            border-style: solid;
+            border-color: #2069f2;
+            /* 上右下左 */
+            border-width: 5px 0 0 5px;
+        }
+        .body-left-1 span:nth-child(2) {
+            position: absolute;
+            padding: 15px;
+            right: -3px;
+            top: -3px;
+            border-style: solid;
+            border-color: #2069f2;
+            /* 上右下左 */
+            border-width: 5px 5px 0 0;
+        }
+        .body-left-1 span:nth-child(3) {
+            position: absolute;
+            padding: 15px;
+            right: -3px;
+            bottom: -3px;
+            border-style: solid;
+            border-color: #2069f2;
+            /* 上右下左 */
+            border-width: 0 5px 5px 0;
+        }
+        .body-left-1 span:nth-child(4) {
+            position: absolute;
+            padding: 15px;
+            left: -3px;
+            bottom: -3px;
+            border-style: solid;
+            border-color: #2069f2;
+            /* 上右下左 */
+            border-width: 0 0 5px 5px;
+        }
+        .body-left-2 {
+            width: 465px;
+	        height: 311px;
+            background-color: aliceblue;
+        }
+        .body-left-3 {
+            width: 568px;
+	        height: 311px;
+            background-color: aliceblue;
+        }
+        .body-right {
+            width: 754px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .body-right-1 {
+            width: 754px;
+	        height: 304px;
+            background-color: #10185d;
+            border: solid 2px #023360;
+        }
+        .body-right-2 {
+            width: 754px;
+	        height: 310px;
+            background-color: aliceblue;
+        }
+        .body-right-3 {
+            width: 755px;
+            height: 311px;
+            background-color: aliceblue;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-l">202X年8月19日         星期三</div>
+            <div class="header-m">泰兴化工封闭管理后台</div>
+            <div class="header-r">23°     东风     空气佳     泰兴</div>
+        </div>
+        <div class="body">
+            <div class="body-left">
+                <div class="body-left-1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    
+                </div>
+                <div class="body-left-2"></div>
+                <div class="body-left-3"></div>
+            </div>
+            <div class="body-right">
+                <div class="body-right-1">
+                    <div id="one" style="width: 100%;height:100%"></div>
+                </div>
+                <div class="body-right-2"></div>
+                <div class="body-right-3"></div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    var one = document.getElementById("one")
+    var myChart = echarts.init(one)
+    var options = {
+        title:{
+            text:'重点用能单位的能耗分析（单位：吨标准煤）',
+            textStyle:{
+                fontSize: 20,
+                color:'#fff'
+            },
+            left: 28,
+            top: 22,
+            padding: [10, 0, 12, 16],
+            backgroundColor:{
+                type: 'linear',
+                x: 0,
+                y: 0,
+                x2: 1,
+                y2: 0,
+                colorStops: [{
+                    offset: 0, color: '#1b2a7b' // 0% 处的颜色
+                }, {
+                    offset: 1, color: '#10185d' // 100% 处的颜色
+                }],
+                global: false // 缺省为 false
+            }
+        },
+        legend:{
+            left: 46,
+            top: 92,
+            width: "30%",
+            itemGap: 26,
+            itemWidth: 36,
+            itemHeight: 20,
+            formatter:function(r) {
+                return '{a|'+r+'}'
+            },
+            textStyle: {
+                fontSize: 16,
+                fontWeight: 400,
+                width:26,
+                color: '#fff',
+                lineHeight: 15,
+                rich:{
+                    a:{
+                        align: 'center'
+                    }
+                }
+            },
+        },
+        color: ["#4590e1", "#06e5b6", "#fc4456", "#2545be"],
+        series:[{
+            type:'pie',
+            roseType: 'radius',
+            startAngle: 125,
+            height:'80%',
+            radius:[23,"80%"],
+            center:[433,190],
+            labelLine:{
+                show: true,
+                length: 10,
+                length2: 50
+            },
+            label:{
+                show:true,
+                formatter: '{b|{b}\n{d}%}',
+                fontSize: 12,
+                fontWeight: 300,
+                color: '#fff',
+                lineHeight: 15,
+                rich: {
+                    b: {
+                        align: 'center',
+                    }
+                }
+            },
+            data:[{
+                    value: 25.92,
+                    name: '蒸汽'
+                },
+                {
+                    value: 18.52,
+                    name: '电'
+                },
+                {
+                    value: 9.26,
+                    name: '煤炭'
+                },
+                {
+                    value: 46.30,
+                    name: '天然气'
+                }].sort((a, b) => a.value - b.value)
+        }]
+    }
+    myChart.setOption(options)
+</script>
+</html>

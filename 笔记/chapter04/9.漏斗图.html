@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/echarts.min.js"></script>
+</head>
+<body>
+    <div id="ec" style="width:600px;height:400px"></div>
+</body>
+<script>
+    var ech = document.getElementById("ec")
+    var mychart = echarts.init(ech)
+    var options = {
+        legend:{},
+        series:[{
+            type:'funnel',
+            label:{
+                position:'inside'
+            },
+            gap:2,
+            // sort:'ascending',
+            data: [
+                { value: 60, name: 'Visit' },
+                { value: 40, name: 'Inquiry' },
+                { value: 20, name: 'Order' },
+                { value: 80, name: 'Click' },
+                { value: 100, name: 'Show' }]
+        }]
+    }
+    mychart.setOption(options)
+</script>
+</html>

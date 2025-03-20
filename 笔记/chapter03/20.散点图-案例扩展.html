@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/echarts.min.js"></script>
+</head>
+<body>
+    <div id="ec" style="width:1200px;height:800px"></div>
+</body>
+<script>
+    var ech = document.getElementById("ec")
+    var mychart = echarts.init(ech)
+    
+    // 径向轴 角度轴
+    var data = [[300,0,5],[120,1,10],[110,1,10],[150,0.4,40],[100,0.8,80],[400,0.2,80]]
+    var data1 = [[310,0.6,5],[220,0.5,10],[210,0.8,20],[110,0.4,40],[330,0.8,80],[350,0.2,80]]
+    var options = {
+        backgroundColor:{
+                    type: 'linear',
+                    x: 0,
+                    y: 0,
+                    x2: 0,
+                    y2: 1,
+                    colorStops: [{
+                        offset: 0, color: '#e7e9ed' // 0% 处的颜色
+                    }, {
+                        offset: 1, color: '#cdd0d5' // 100% 处的颜色
+                    }],
+                    global: false // 缺省为 false
+                },
+        xAxis:{
+            type:'value',
+            splitLine:{
+                show:true,
+                lineStyle: {
+                    type:'dashed'
+                } 
+            },
+        },
+        yAxis:{
+            type:'value',
+            splitLine:{
+                show:true,
+                lineStyle: {
+                    type:'dashed'
+                } 
+            }
+        },
+        toolbox:{
+            left:'10%',
+            feature:{
+                saveAsImage:{}
+            } 
+        },
+        legend:{
+            right:'10%'
+        },
+        title:{
+            text:'广州大学数据分析',
+            subtext:'各学院女生比例',
+            textAlign:'center',
+            left:'50%'
+        },
+        series:[{
+            name:'15届',
+            type:'scatter',
+            symbolSize:function(r){
+                return r[2]
+            },
+            itemStyle:{
+                shadowColor: 'rgb(194, 177, 183)',
+                shadowBlur: 10,
+                shadowOffsetY:10,
+                color:{
+                    type: 'linear',
+                    x: 0,
+                    y: 0,
+                    x2: 0,
+                    y2: 1,
+                    colorStops: [{
+                        offset: 0, color: 'rgba(231, 119, 129)' // 0% 处的颜色
+                    }, {
+                        offset: 1, color: 'rgba(208, 90, 106)' // 100% 处的颜色
+                    }],
+                    global: false // 缺省为 false
+                }
+            },
+            data:data
+        },{
+            name:'16届',
+            type:'scatter',
+            symbolSize:function(r){
+                return r[2]
+            },
+            data:data1
+        }]
+    }
+    mychart.setOption(options)
+</script>
+</html>

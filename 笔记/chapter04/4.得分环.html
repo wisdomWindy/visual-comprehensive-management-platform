@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/echarts.min.js"></script>
+</head>
+<body>
+    <div id="ec" style="width:600px;height:800px"></div>
+</body>
+<script>
+    var ech = document.getElementById("ec")
+    var mychart = echarts.init(ech)
+    var data = [
+                {value:50,name:'好',
+                    detail:{
+                        offsetCenter :[0, '-20%'],
+                    },
+                    title:{
+                        offsetCenter :[0, '-30%']
+                    }
+                },
+                {value:20,name:'正常',
+                    detail:{
+                        offsetCenter :[0, '10%'],
+                    },
+                    title:{
+                        offsetCenter :[0, '0%']
+                    }
+            },{value:30,name:'坏',
+                    detail:{
+                        offsetCenter :[0, '40%'],
+                    },
+                    title:{
+                        offsetCenter :[0, '30%']
+                    }
+        }]
+    var options = {
+        series:[{
+            type:'gauge',
+            startAngle:90,
+            endAngle:-270,
+            axisLine:{
+                lineStyle:{
+                    width:40
+                }
+            },
+            axisLabel:{
+                show:false
+            },
+            splitLine:{
+                show:false
+            },
+            axisTick:{
+                show:false
+            },
+            pointer:{
+                show:false
+            },
+            progress:{
+                show:true,
+                overlap:false,
+                roundCap:true
+            },
+            detail:{
+                height:14,
+                width:50,
+                fontSize:14,
+                formatter:'{value}%',
+                color:'inherit',
+                borderColor:'inherit',
+                borderWidth:1,
+                borderRadius:14
+            },
+            title:{
+                fontSize:14
+            },
+            data:data
+        }]
+    }
+    setInterval(()=>{
+        var d1 = (Math.random()*100).toFixed(2)
+        var d2 = (Math.random()*100).toFixed(2)
+        var d3 = (Math.random()*100).toFixed(2)
+        data[0].value = d1
+        data[1].value = d2
+        data[2].value = d3
+        var options = {
+            series:[{
+                data:data
+            }]
+        }
+        mychart.setOption(options)
+    },2000)
+    mychart.setOption(options)
+</script>
+</html>

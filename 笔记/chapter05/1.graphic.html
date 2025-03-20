@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/echarts.min.js"></script>
+</head>
+<body>
+    <div id="ec" style="width:600px;height:400px;background-color: #eee;"></div>
+</body>
+<script>
+    var ech = document.getElementById("ec")
+    var mychart = echarts.init(ech)
+    var dataOp = []
+    for(var i=0;i<=6;i++) {
+        dataOp.push({
+                type:'rect',
+                x: i*20,
+                shape:{
+                    x:0,
+                    y:-40,
+                    width:10,
+                    height:80
+                },
+                style:{
+                    fill:'#5d69c2'
+                },
+                keyframeAnimation: [{
+                    // 呼吸效果的缩放动画
+                    duration: 1000,
+                    delay:i*200,
+                    loop: true,
+                    keyframes: [{
+                        percent: 0.5,
+                        easing: 'cubicIn',
+                        scaleY: 0.1
+                    }, {
+                        percent: 1,
+                        easing: 'cubicOut',
+                        scaleY: 1
+                    }]
+                }]
+            })
+    }
+    console.log(dataOp)
+    var options = {
+        graphic:{
+            type:'group',
+            left:'center',
+            top:'middle',
+            children:dataOp
+        }
+    }
+    mychart.setOption(options)
+</script>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/echarts.min.js"></script>
+</head>
+<body>
+    <div id="ec" style="width:600px;height:400px"></div>
+</body>
+<script>
+    var ech = document.getElementById("ec")
+    var mychart = echarts.init(ech)
+    var options = {
+        series:[{
+            type:'gauge',
+            min:0,
+            max:240,
+            startAngle:180,
+            endAngle:0,
+            axisLine:{
+                roundCap:true,
+                lineStyle:{
+                    width:18
+                }
+            },
+            splitNumber:12,
+            axisTick:{
+                splitNumber:2,
+                lineStyle:{
+                    width:2,
+                    color:'#999999'
+                }
+            },
+            axisLabel:{
+                distance:20
+            },
+            splitLine:{
+                length:12,
+                lineStyle:{
+                    width:3,
+                    color:'#999999'
+                }
+            },
+            progress:{
+                show:true,
+                width:18,
+                roundCap:true
+            },
+            itemStyle:{
+                color:'#57d7f7',
+                shadowColor:'#ccdffe',
+                shadowBlur:10,
+                shadowOffsetX:2,
+                shadowOffsetY:2
+            },
+            data:[{value:100,name:'SCORE'}]
+        }]
+    }
+    mychart.setOption(options)
+</script>
+</html>

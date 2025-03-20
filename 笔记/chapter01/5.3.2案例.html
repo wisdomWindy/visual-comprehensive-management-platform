@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/echarts.min.js"></script>
+</head>
+<body>
+    <div id="echs" style="width: 300px; height:200px"></div>
+    <script>
+        var idEchs = document.getElementById("echs")
+        var ehc = echarts.init(idEchs)
+        console.log(ehc)
+        var options = {
+            title:{
+                text: 'hello world',
+                link:'https://www.baidu.com',
+                subtext: '你好世界',
+                left:100,
+                textStyle:{
+                    color:'red'
+                },
+                textAlign:'center'
+            }
+        }
+        ehc.setOption(options)
+     </script>
+</body>
+</html>

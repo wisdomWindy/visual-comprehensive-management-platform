@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/echarts.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+</head>
+<body>
+    <div id="ec" style="width:1200px;height:800px"></div>
+</body>
+<script>
+    var ech = document.getElementById("ec")
+    var mychart = echarts.init(ech)
+    var url = 'https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json'
+    $.getJSON(url,function(r) {
+        echarts.registerMap("中国",r)
+
+        var options = {
+            geo:{
+                map:"中国",
+                show:false,
+            },
+            visualMap:{
+                type:'piecewise',
+                min:0,
+                max:1000,
+                text:['高','低'],
+                showLabel:true,
+                pieces:[
+                    {   
+                        gt: 100, 
+                        label:'>100人',
+                        color:'#7f1100'
+                    },{
+                        gte: 10,
+                        lte: 100,
+                        label:'10-100人',
+                        color:'#ff5428'
+                    },{
+                        gt: 1,
+                        lte: 9,
+                        label:'1-9 人',
+                        color:'#ff8c71'
+                    },{
+                        gt: 0,
+                        lte: 1,
+                        label:'疑似',
+                        color:'#ffd768'
+                    },{
+                        lte: 0,
+                        label:0,
+                        color:'#fff'
+                    }
+                ]
+                
+            },
+            series:[{
+                type:'map',
+                map:"中国",
+                label:{
+                    show:true,
+                    fontWeight:600,
+                    formatter:function(r) {
+                        if(r.name === '内蒙古自治区') {
+                            return r.name.substr(0,3)
+                        }
+                        return r.name.substr(0,2)
+                    }
+                },
+                data:[
+                    {name:'广东省',value: 28},
+                    {name:'湖北省',value: 128},
+                    {name:'浙江省',value: 108},
+                    {name:'江苏省',value: 58},
+                    {name:'安徽省',value: 68},
+                    {name:'河南省',value: 18},
+                    {name:'山西省',value: 8},
+                    {name:'青海省',value: 8},
+                    {name:'西藏自治区',value: 0},
+                ]
+            }]
+        }
+        mychart.setOption(options)
+    })
+    
+    
+</script>
+</html>

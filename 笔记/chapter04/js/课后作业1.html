@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://fastly.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+</head>
+<body>
+    <div id="dv" style="width:1200px;height:800px;"></div>
+</body>
+<script>
+   var dv = document.getElementById("dv")
+   var myChart = echarts.init(dv)
+   var obj = [{
+            title: '常任教师',
+            xAxis: ['正高级', '副高级', '讲师', '实习讲师'],
+            color: '#73a0fb',
+            value: [10, 20, 40, 32]
+        },
+        {
+            title: '兼职教师',
+            xAxis: ['正高级', '副高级', '实习讲师'],
+            color:'#73deb4',
+            value: [20, 10, 42]
+        }
+   ]
+   var pieData = obj.map((r)=>r.value.reduce((x, y) => x + y))
+   var colors =  obj.map((r)=>r.color)
+   var option = {
+        grid:[{
+            left:'40%',
+            // bottom:16
+        },{
+            left:30
+        }],
+        xAxis:[{
+            gridIndex:0,
+            type:'category',
+            data:obj[0].xAxis
+        },{
+            show:false,
+            gridIndex:1,
+            type:'value',
+            min:0,
+            max:1
+        }],
+        yAxis:[{
+            gridIndex:0,
+            type:'value'
+        },{
+            show:false,
+            gridIndex:1,
+            type:'value',
+            min:0,
+            max:1
+        }],
+        series:[{
+            type:'bar',
+            barWidth:16,
+            xAxisIndex:0,
+            yAxisIndex:0,
+            id:'b',
+            itemStyle:{
+                color:colors[0]
+            },
+            data:obj[0].value
+        },{
+            type:'pie',
+            width:'32%',
+            left:16,
+            label:{
+                show:false
+            },
+            color:colors,
+            radius:['80%','90%'],
+            data:pieData
+        },{
+            type:'scatter',
+            symbol:'arrow',
+            symbolRotate:-90,
+            symbolSize:25,
+            xAxisIndex:1,
+            yAxisIndex:1,
+            data:[
+                [0.4,0.5]
+            ]
+        }]
+   }
+   myChart.setOption(option)
+   myChart.on('mouseover','series.pie',function(param){
+    var idx = param.dataIndex
+    myChart.setOption({
+        xAxis:{
+            data:obj[idx].xAxis
+        },
+        series:[{
+            type:'bar',
+            id:'b',
+            itemStyle:{
+                color:colors[idx]
+            },
+            data:obj[idx].value
+        }]
+    })
+   })
+</script>
+</html>

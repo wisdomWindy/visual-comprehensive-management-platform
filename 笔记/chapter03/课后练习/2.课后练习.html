@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/echarts.min.js"></script>
+</head>
+<body>
+    <div id="ec" style="width:600px;height:400px"></div>
+</body>
+<script>
+    var ech = document.getElementById("ec")
+    var mychart = echarts.init(ech)
+    var options = {
+        radar:{
+            shape:'circle',
+            indicator: [
+                { name: '销售（sales）', max: 6500},
+                { name: '管理（Administration）', max: 16000}, // 标签设置为红色
+                { name: '信息技术（Information Techology）', max: 30000},
+                { name: '客服（Customer Support）', max: 38000},
+                { name: '研发（Development）', max: 52000}
+            ]
+        },
+        color:['red','black','green','#cc846b','#94c6ad'],
+        series:[{
+            type:'radar',
+            // colorBy:'data',
+            data:[
+                {
+                symbolSize:20,
+                lineStyle:{
+                    color:'none'
+                },
+                value:[6500,0,0,0,0]
+            }
+            ,{
+                symbolSize:20,
+                lineStyle:{
+                    color:'none'
+                },
+                value:[0,16000,0,0,0]
+                
+            },{
+                symbolSize:20,
+                lineStyle:{
+                    color:'none'
+                },
+                value:[0,0,30000,0,0]
+                
+            },{
+                symbolSize:20,
+                lineStyle:{
+                    color:'none'
+                },
+                value:[0,0,0,38000,0]
+                
+            },{
+                symbolSize:20,
+                lineStyle:{
+                    color:'none'
+                },
+                value:[0,0,0,0,52000]
+                
+            },{
+                symbolSize:5,
+                itemStyle:{
+                    color:'white'
+                },
+                lineStyle:{
+                    color:'#7be6d3'
+                },
+                areaStyle:{
+                    color:'#ececec'
+                },
+                value:[2000,14000,30000,8000,16000]
+                
+            },
+        ]
+        }]
+    }
+    mychart.setOption(options)
+</script>
+</html>

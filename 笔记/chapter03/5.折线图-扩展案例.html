@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/echarts.min.js"></script>
+</head>
+<body>
+    <div id="ec" style="width:600px;height:400px"></div>
+</body>
+<script>
+    var ech = document.getElementById("ec")
+    var mychart = echarts.init(ech)
+    var options = {
+        toolbox:{
+            feature:{
+                dataZoom:{},
+                dataView:{},
+                magicType:{
+                    type:['line','bar']
+                },
+                restore:{},
+                saveAsImage:{}
+            }
+        },
+        xAxis:{
+            type:'category',
+            data:['周一','周二','周三','周四','周五','周六','周末'],
+            boundaryGap:false,
+            axisTick:{
+                // alignWithLabel:true
+            }
+        },
+        yAxis:{
+            type:'value',
+            axisLabel:{
+                formatter: '{value} ℃'
+            }
+        },
+        series:[{
+            type:'line',
+            data:[50,80,90,23,67,50,32],
+            markPoint:{
+                data:[
+                    {
+                        name: '最大值',
+                        type: 'max'
+                    },
+                    {
+                        name: '最小值',
+                        type: 'min'
+                    }
+                ]
+            },
+            markLine:{
+                data:[
+                    {
+                        name: '平均线',
+                        // 支持 'average', 'min', 'max'
+                        type: 'average'
+                    }
+                ]
+            }
+        }]
+    }
+    mychart.setOption(options)
+</script>
+</html>

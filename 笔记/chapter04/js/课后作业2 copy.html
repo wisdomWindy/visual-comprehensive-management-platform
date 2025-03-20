@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://fastly.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+</head>
+<body>
+    <div id="dv" style="width:1200px;height:800px;"></div>
+</body>
+<script>
+   var dv = document.getElementById("dv")
+   var myChart = echarts.init(dv)
+   let dataList = [
+    [
+        'No.1 XXXX有限责任公司',
+        'No.2 XXXXXXXX有限责任公司',
+        'No.2 XXXXXX有限责任公司',
+        'No.4 XX有限责任公司',
+        'No.5 XXXXXX有限责任公司'
+    ],
+  [88, 70, 60, 31, 21],
+];
+
+let colors = [
+    ['#d18843','#c97b33','#9c571c','#bc732e'],
+    ['#1d87ff','#2182f7','#0f69c9','#0f87ff']
+];
+
+    option = {
+        backgroundColor: '#023142',
+        grid: {
+            left: '6%',
+            right: '4%',
+            bottom: '3%',
+            top: '10%',
+            containLabel: true,
+        },
+        xAxis: [{
+            type: 'value',
+        }],
+        yAxis: [{
+            type:'category',
+            axisLabel:{
+                show:false
+            },
+            inverse:true,
+            axisTick:{
+                show:false
+            },
+            data:dataList[0]
+        }],
+        series:[{
+            type:'bar',
+            barWidth:25,
+            label:{
+                show:true,
+                position: [0,-50],
+                formatter:function(r) {
+                    return '{a|'+r.name+'} ' +' {b|'+r.value+'%}'
+                },
+                rich:{
+                    a:{
+                        fontSize:40,
+                        color:'#fff'
+                    },
+                    b:{
+                        fontSize:40,
+                        color:'#d18843'
+                    }
+                },
+                
+            },
+            itemStyle:{
+                color:{
+                    type: 'linear',
+                    x: 0,
+                    y: 0,
+                    x2: 0,
+                    y2: 1,
+                    colorStops: [{
+                            offset: 0, 
+                            color: colors[0][0] // 0% 处的颜色
+                        },{
+                            offset: 0.5,
+                            color: colors[0][1],
+                        },
+                        {
+                            offset: 0.5,
+                            color: colors[0][2],
+                        }, {
+                            offset: 1,
+                            color: colors[0][3] // 100% 处的颜色
+                        }
+                    ],
+                    global: false // 缺省为 false
+                },
+            },
+            data:dataList[1]
+        },{
+            type:'pictorialBar',
+            symbol: 'diamond',
+            symbolSize: [25 / 2, 25],
+            symbolOffset: [-25 / 4, 0],
+            symbolPosition: 'end',
+            z: 12,
+            itemStyle:{
+                color:{
+                    type: 'linear',
+                    x: 0,
+                    y: 0,
+                    x2: 0,
+                    y2: 1,
+                    colorStops: [{
+                            offset: 0, 
+                            color: colors[0][0] // 0% 处的颜色
+                        },{
+                            offset: 0.5,
+                            color: colors[0][1],
+                        },
+                        {
+                            offset: 0.5,
+                            color: colors[0][2],
+                        }, {
+                            offset: 1,
+                            color: colors[0][3] // 100% 处的颜色
+                        }
+                    ],
+                    global: false // 缺省为 false
+                },
+            },
+            data:[0,0,0,0,0]
+        },{
+            type:'pictorialBar',
+            symbol: 'diamond',
+            symbolSize: [25 / 2, 25],
+            symbolOffset: [25 / 4, 0],
+            symbolPosition: 'end',
+            z: 12,
+            itemStyle:{
+                color:{
+                    type: 'linear',
+                    x: 0,
+                    y: 0,
+                    x2: 0,
+                    y2: 1,
+                    colorStops: [{
+                            offset: 0, 
+                            color: colors[0][0] // 0% 处的颜色
+                        },{
+                            offset: 0.5,
+                            color: colors[0][1],
+                        },
+                        {
+                            offset: 0.5,
+                            color: colors[0][2],
+                        }, {
+                            offset: 1,
+                            color: colors[0][3] // 100% 处的颜色
+                        }
+                    ],
+                    global: false // 缺省为 false
+                },
+            },
+            data:dataList[1]
+        }]
+    }
+   myChart.setOption(option)
+   
+</script>
+</html>

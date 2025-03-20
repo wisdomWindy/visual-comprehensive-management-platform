@@ -1,0 +1,165 @@
+<template>
+ <div class="input-chart" ref="chartBox"></div>
+</template>
+
+<script setup>
+import useEcharts from '@/hooks/useEcharts';
+const category = ['12-06','12-07','12-8','12-09','12-10','12-11','12-12']
+const forengeCountry = [7000,9500,9000,1500,7800,9000,9800,];
+const countrySide = [3000,7800,6500,8200,7500,5500,7000];
+const income = [1.5,1.49,1.38,1.55,1.48,1.52,1.63]
+const transitioncapacity = [1.35,1.45,1.35,1.6,1.42,1.63,1.75]
+const {container:chartBox} = useEcharts({
+  legend:[{
+    itemWidth:12,
+    itemHeight:12,
+    icon:'circle',
+    textStyle:{
+      color:'#68D5EA',
+      fontSize:12,
+    },
+    top:'7%',
+    left:'15%',
+    data:[{
+      name:'国际',
+      itemStyle:{
+        color:'#54FFD9'
+      }
+    },{
+      name:'国内',
+      itemStyle:{
+        color:'#FFF57B'
+      }
+    }]
+  },{
+    itemWidth:12,
+    itemHeight:12,
+    icon:'circle',
+    textStyle:{
+      color:'#68D5EA',
+      fontSize:12,
+    },
+    top:'7%',
+    right:'15%',
+    data:[{
+      name:'收入',
+      itemStyle:{
+        color:'#ED97FF'
+      }
+    },{
+      name:'运力',
+      itemStyle:{
+        color:'#68D5EA'
+      }
+    }]
+  }],
+  xAxis:{
+    type:'category',
+    data:category,
+    axisLabel:{
+      color:'#68D5EA'
+    },
+    axisTick:{
+      show:false,
+      alignWithLabel:true
+    }
+  },
+  yAxis:[{
+    type:'value',
+    alignTicks:true,
+    axisLabel:{
+      color:'#68D5EA',
+    },
+    axisLine:{
+      show:false
+    },
+    axisTick:{
+      show:false,
+      alignWithLabel:true,
+    },
+    splitLine:{
+      lineStyle:{
+        color:'rgba(83,198,222,0.24)'
+      }
+    },
+    name:'收入(万元)',
+    nameTextStyle:{
+      color:'#68D5EA'
+    }
+  },{
+    type:'value',
+    position:'right',
+    alignTicks:true,
+    axisLabel:{
+      color:'#68D5EA',
+    },
+    axisLine:{
+      show:false
+    },
+    axisTick:{
+      show:false,
+      alignWithLabel:true,
+    },
+    splitLine:{
+      show:false,
+      lineStyle:{
+        color:'rgba(83,198,222,0.24)'
+      }
+    },
+    name:'运力(万座)',
+    nameTextStyle:{
+      color:'#68D5EA'
+    }
+  }],
+  series:[{
+    type:'bar',
+    name:'国际',
+    data:forengeCountry,
+    barWidth:10,
+    itemStyle:{
+      color:'#54FFD9'
+    },
+  },{
+    type:'bar',
+    name:'国内',
+    barWidth:10,
+    data:countrySide,
+    itemStyle:{
+      color:'#FFF57B'
+    },
+  },{
+    type:'line',
+    name:'收入',
+    yAxisIndex:1,
+    smooth:true,
+    data:income,
+    lineStyle:{
+      color:'#ED97FF'
+    },
+    itemStyle:{
+      color:'#ED97FF',
+      borderColor:'#ED97FF'
+    }
+  },{
+    type:'line',
+    name:'运力',
+     smooth:true,
+    yAxisIndex:1,
+    data:transitioncapacity,
+    lineStyle:{
+      color:'#49D0ED'
+    },
+    itemStyle:{
+      color:'#49D0ED',
+      borderColor:'#49D0ED'
+    }
+  }]
+})
+</script>
+
+<style scoped>
+.input-chart{
+  width: 100%;
+  height: calc(100% - 40px);
+}
+</style>
