@@ -45,7 +45,7 @@ const props = defineProps({
   font-size:20px;
   text-align: center;
   color: #fff;
-  background: url('/imgs/demo15/statistics.png') no-repeat 0% 0%/100% 100%;
+  background: url('/imgs/demo15/statistics_bg.png') no-repeat 0% 0%/100% 100%;
 }
 .value{
   color: #49FDFD;
