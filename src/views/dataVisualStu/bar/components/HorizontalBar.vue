@@ -25,7 +25,9 @@ const {
     },
     grid:{
       containLabel:true,
-      top:'20%'
+      top:'20%',
+      left:'4%',
+      bottom:'10%'
     },
     legend: {
       data: ['A产品', 'B产品', 'C产品', 'D产品', 'E产品']

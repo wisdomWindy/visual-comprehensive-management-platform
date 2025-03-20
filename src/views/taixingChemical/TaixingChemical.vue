@@ -57,7 +57,7 @@ import StructuralAnalysis from './components/StructuralAnalysis.vue'
   padding:0 10px 15px;
   align-items: center;
   justify-content: space-between;
-  background: url('/imgs/header-bg.png') no-repeat 0% 0%/100% 100%;
+  background: url('/imgs/header_bg.png') no-repeat 0% 0%/100% 100%;
 }
 .header-right {
   justify-content: flex-end;

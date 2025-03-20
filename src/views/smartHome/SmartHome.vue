@@ -10,6 +10,6 @@ import MapChart from './components/MapChart.vue';
 
 <style scoped>
  .container{
-  background-image: url('../../assets/bg/bg_1.png');
+  background-image: url('/imgs/main_bg.png');
  }
 </style>
