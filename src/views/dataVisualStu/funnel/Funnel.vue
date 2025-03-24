@@ -1,7 +1,7 @@
 <template>
- <dive class="container">
+ <div class="container">
   <BaseFunnel></BaseFunnel>
- </dive>
+ </div>
 </template>
 
 <script setup>

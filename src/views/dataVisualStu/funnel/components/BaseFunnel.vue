@@ -8,6 +8,12 @@ const {container:funnel} = useEcharts({
     legend:{
       data:['登录', '注册']
     },
+    grid:{
+      left:'10%',
+      right:'10%',
+      top:'10%',
+      bottom:'10%'
+    },
     series:[{
       type:'funnel',
       name:'漏斗图',
@@ -29,6 +35,6 @@ const {container:funnel} = useEcharts({
 <style scoped>
 .funnel{
   width:50%;
-  height: 200px;
+  height: 300px;
  }
 </style>
